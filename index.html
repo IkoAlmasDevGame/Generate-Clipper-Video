@@ -201,6 +201,30 @@
                     </button>
                 </div>
 
+                <!-- NEW: URL Input Section -->
+                <div class="w-full max-w-2xl mt-8 flex flex-col items-center">
+                    <div class="flex items-center gap-4 w-full mb-6 opacity-50">
+                        <div class="flex-grow h-px bg-zinc-700"></div>
+                        <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">ATAU IMPOR VIA TAUTAN</span>
+                        <div class="flex-grow h-px bg-zinc-700"></div>
+                    </div>
+                    
+                    <div class="flex w-full max-w-xl gap-2 relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-link text-zinc-500 group-focus-within:text-brand-400 transition-colors"></i>
+                        </div>
+                        <input type="url" id="video-url-input" placeholder="Tempel URL video langsung (contoh: https://domain.com/video.mp4)"
+                               class="flex-grow bg-zinc-900/80 border border-zinc-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white text-sm rounded-xl py-3.5 pl-11 pr-4 shadow-inner outline-none transition-all placeholder-zinc-600">
+                        <button id="fetch-url-btn"
+                                class="px-6 py-3.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl shadow-depth-slate hover:shadow-depth-slate-hover active:shadow-depth-slate-active active:translate-y-0.5 transition-all duration-150 inline-flex items-center gap-2 text-sm whitespace-nowrap border border-zinc-700">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Impor
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-zinc-500 mt-3 text-center max-w-lg">
+                        <i class="fa-solid fa-shield-halved text-brand-400 mr-1"></i> <strong>Keamanan Privasi:</strong> Karena arsitektur kami 100% sisi-klien, kami merekomendasikan <strong>Direct Video URL</strong> (.mp4/.webm). Tautan dari platform pihak ketiga mungkin dilindungi oleh enkripsi CORS dan tidak dapat ditarik langsung ke browser.
+                    </p>
+                </div>
+
                 <!-- Feature badges -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-2xl mt-12 border-t border-zinc-800 pt-8">
                     <div class="flex items-start gap-3 text-left">
@@ -545,6 +569,10 @@
         const dropZone = document.getElementById('drop-zone');
         const studioVideo = document.getElementById('studio-video');
         
+        // Input URL Targets
+        const urlInput = document.getElementById('video-url-input');
+        const fetchUrlBtn = document.getElementById('fetch-url-btn');
+
         const clipStartInput = document.getElementById('clip-start-range');
         const clipEndInput = document.getElementById('clip-end-range');
         const trackHighlight = document.getElementById('timeline-track-highlight');
@@ -602,6 +630,53 @@
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
                 processUploadedFile(e.target.files[0]);
+            }
+        });
+
+        // URL Fetching Logic (Direct link downloader to Blob)
+        fetchUrlBtn.addEventListener('click', async () => {
+            const url = urlInput.value.trim();
+            if (!url) {
+                showNotification("Silakan masukkan URL video terlebih dahulu.");
+                return;
+            }
+
+            try {
+                // Switch UI to loading state
+                const originalBtnText = fetchUrlBtn.innerHTML;
+                fetchUrlBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Memuat...`;
+                fetchUrlBtn.disabled = true;
+                
+                showNotification("Memproses jaringan dan mengunduh buffer video...");
+
+                // Fetching data natively
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Akses ditolak oleh server (CORS) atau URL tidak valid");
+                
+                const blob = await response.blob();
+                if (!blob.type.startsWith('video/')) {
+                    throw new Error("Tautan tidak berisi format stream video yang valid");
+                }
+
+                // Simulate File Object to inject into our existing local pipeline seamlessly
+                const fileNameExtracted = url.substring(url.lastIndexOf('/') + 1).split('?')[0] || "IkoAlmas_Imported.mp4";
+                const simulatedFile = new File([blob], fileNameExtracted, { type: blob.type });
+                
+                // Reset states
+                fetchUrlBtn.innerHTML = originalBtnText;
+                fetchUrlBtn.disabled = false;
+                urlInput.value = '';
+                
+                // Pipeline Trigger
+                processUploadedFile(simulatedFile);
+
+            } catch (error) {
+                console.error("IkoAlmas Fetch Error:", error);
+                // Reset states on error
+                fetchUrlBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-down"></i> Impor`;
+                fetchUrlBtn.disabled = false;
+                
+                showNotification("Gagal mengimpor. URL diblokir oleh CORS platform atau bukan Tautan Langsung.");
             }
         });
 
