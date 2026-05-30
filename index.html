@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IkoAlmas Clipper - AI Auto Video Clipping & Highlight Extractor</title>
+    <title>IkoAlmas Clipper - Studio Potong Video Otomatis & Profesional</title>
     
-    <!-- Load Plus Jakarta Sans font -->
+    <!-- Font Premium: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Load Tailwind CSS via CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Load Lucide Icons for premium-quality vectors -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome untuk Ikonografi Premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Configure Tailwind for high-end styling elements -->
+    <!-- Konfigurasi Tema Tailwind -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -26,1295 +27,1113 @@
                     },
                     colors: {
                         brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9', // Deep Tech Blue
-                            600: '#0284c7',
-                            900: '#0c4a6e',
-                            950: '#031b2c', // Ultra Slate
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6', // Indigo-Violet hybrid
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
                         },
-                        accent: {
-                            500: '#a855f7', // Luxury Purple
-                            600: '#9333ea',
+                        studio: {
+                            bg: '#09090b', // Deep carbon neutral
+                            card: '#18181b', // Zinc card
+                            border: '#27272a',
+                            textMuted: '#a1a1aa'
                         }
                     },
                     boxShadow: {
-                        'premium': '0 10px 30px -10px rgba(2, 132, 199, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05)',
-                        '3d-btn': '0 4px 0px 0px #0284c7, 0 10px 20px -5px rgba(2, 132, 199, 0.3)',
-                        '3d-btn-hover': '0 2px 0px 0px #0284c7, 0 6px 12px -3px rgba(2, 132, 199, 0.4)',
-                        '3d-btn-dark': '0 4px 0px 0px #0f172a, 0 10px 20px -5px rgba(15, 23, 42, 0.3)',
-                        '3d-btn-dark-hover': '0 2px 0px 0px #0f172a, 0 6px 12px -3px rgba(15, 23, 42, 0.4)',
-                        '3d-btn-purple': '0 4px 0px 0px #7e22ce, 0 10px 20px -5px rgba(168, 85, 247, 0.3)',
-                        '3d-btn-purple-hover': '0 2px 0px 0px #7e22ce, 0 6px 12px -3px rgba(168, 85, 247, 0.4)',
+                        // Efek Kedalaman 3D Premium untuk Tombol (Double-layer & Inner light glow)
+                        'depth-primary': '0 4px 14px 0 rgba(124, 58, 237, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.3)',
+                        'depth-primary-hover': '0 6px 20px 0 rgba(124, 58, 237, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.4)',
+                        'depth-primary-active': 'inset 0 3px 6px 0 rgba(0, 0, 0, 0.4)',
+                        
+                        'depth-slate': '0 4px 12px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+                        'depth-slate-hover': '0 6px 16px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                        'depth-slate-active': 'inset 0 3px 6px 0 rgba(0, 0, 0, 0.6)',
+
+                        'studio-glow': '0 0 30px rgba(139, 92, 246, 0.15)',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom Premium Styles for Top Firm Feel -->
+    <!-- Custom Styling untuk Range Sliders & Scrollbar -->
     <style>
+        /* Base Dark Overrides */
         body {
-            background-color: #fafbfc;
-            color: #0f172a;
-            background-image: 
-                radial-gradient(#e2e8f0 1.5px, transparent 1.5px),
-                radial-gradient(#e2e8f0 1.5px, #fafbfc 1.5px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+            background-color: #09090b;
+            color: #f4f4f5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Glassmorphism containers with premium micro-borders */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.04);
-        }
-
-        /* Dual range slider design logic */
-        .slider-track {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 9999px;
-            position: relative;
-        }
-
-        .slider-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #0ea5e9, #a855f7);
-            border-radius: 9999px;
-            position: absolute;
-        }
-
-        /* Alignment yang presisi untuk visual handle agar tidak meleset */
-        .slider-handle-visual {
-            top: 50%;
-            transform: translateY(-50%);
-            margin-left: -10px; /* Separuh dari lebar (20px) agar center */
-        }
-
-        /* Input range bawaan (transparan dan berada di atas untuk fungsionalitas) */
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            cursor: pointer;
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            cursor: pointer;
-            border: none;
-        }
-
-        /* Button Press Interaction Transitions */
-        .btn-3d-interact {
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
-        }
-        .btn-3d-interact:active {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0px 0px transparent !important;
-        }
-
-        /* Custom scrollbars for clean timeline UI */
+        /* Scrollbar Premium */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: transparent;
+            background: #09090b;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: #27272a;
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #3f3f46;
+        }
+
+        /* Double Range Slider Styling */
+        .range-slider-container input[type="range"] {
+            -webkit-appearance: none;
+            pointer-events: none;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            background: transparent;
+        }
+
+        .range-slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            pointer-events: auto;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #8b5cf6;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease, border-color 0.1s ease;
+        }
+
+        .range-slider-container input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            border-color: #a78bfa;
+        }
+
+        .range-slider-container input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(0.95);
+        }
+
+        /* Glow effect on hover card */
+        .hover-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-glow:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
         }
     </style>
 </head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500 selection:text-white">
 
-<body class="min-h-screen flex flex-col font-sans antialiased">
+    <!-- Navigation / Header -->
+    <header class="border-b border-studio-border bg-studio-bg/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-4">
+            <div class="flex items-center gap-3">
+                <!-- Top Firm Brand Icon -->
+                <div class="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center shadow-[0_4px_12px_rgba(124,58,237,0.3)]">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
+                        IkoAlmas <span class="bg-gradient-to-r from-brand-500 to-violet-400 bg-clip-text text-transparent">Clipper</span>
+                    </h1>
+                    <span class="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">Enterprise Suite</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#features" class="hover:text-white transition-colors">Teknologi</a>
+                <a href="#privacy" class="hover:text-white transition-colors">Enkripsi & Keamanan</a>
+                <a href="#guide" class="hover:text-white transition-colors">Pusat Bantuan</a>
+            </div>
 
-    <nav class="fixed w-full z-50 glass-card border-b border-slate-200/80 transition-all duration-300" id="main-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Brand Logo & Identity -->
-                <div class="flex items-center gap-3 cursor-pointer">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-950 to-brand-900 flex items-center justify-center text-white shadow-lg border border-brand-500/10">
-                        <i data-lucide="scissors" class="w-5 h-5 text-brand-500 animate-pulse"></i>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Sisi Klien (Aman)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main App Body -->
+    <main class="flex-grow flex flex-col py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full justify-center">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-8 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 animate-fade-in">
+                <i class="fa-solid fa-sparkles"></i> Deteksi & Kliping Otomatis Berbasis Audio
+            </div>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                Potong Video Otomatis <br>
+                <span class="bg-gradient-to-r from-brand-500 via-purple-400 to-pink-400 bg-clip-text text-transparent">Tanpa Batas & Gratis</span>
+            </h2>
+            <p class="text-md sm:text-lg text-zinc-400 mt-4 max-w-xl mx-auto leading-relaxed">
+                Platform editor lokal dengan performa komputasi tinggi. Proses kliping instan langsung dari browser tanpa server cloud.
+            </p>
+        </div>
+
+        <!-- Central Interactive Dashboard Box -->
+        <div class="bg-studio-card w-full rounded-3xl border border-zinc-800 shadow-studio-glow overflow-hidden relative">
+            
+            <!-- STAGE 1: File Drop Zone & Upload Interface -->
+            <div id="upload-stage" class="p-8 sm:p-16 flex flex-col items-center text-center">
+                <div id="drop-zone" class="w-full max-w-2xl border border-dashed border-zinc-700 hover:border-brand-500 rounded-2xl p-10 sm:p-14 cursor-pointer bg-zinc-900/50 hover:bg-zinc-900/80 transition-all duration-300 flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center mb-6 border border-zinc-700 shadow-inner group">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-zinc-400 group-hover:text-brand-400 transition-colors"></i>
                     </div>
-                    <div>
-                        <span class="font-extrabold text-2xl tracking-tight text-brand-950">
-                            IkoAlmas<span class="text-brand-500 font-light">.clipper</span>
-                        </span>
-                        <p class="text-[10px] font-bold tracking-widest text-slate-400 uppercase mt-0.5">Enterprise Video Lab</p>
+                    <h3 class="text-xl font-bold text-white mb-2">Unggah Video Anda</h3>
+                    <p class="text-zinc-500 text-sm max-w-sm mb-8 leading-relaxed">
+                        Tarik & lepas file Anda di sini, atau cari secara manual. Mendukung format MP4, WebM, MOV, atau MKV.
+                    </p>
+                    
+                    <input type="file" id="video-file-input" class="hidden" accept="video/*">
+                    
+                    <!-- Depth Button: Upload -->
+                    <button onclick="document.getElementById('video-file-input').click()" 
+                            class="px-8 py-3.5 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-600 text-white font-bold rounded-xl shadow-depth-primary hover:shadow-depth-primary-hover active:shadow-depth-primary-active active:translate-y-0.5 transition-all duration-150 inline-flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-file-video"></i> Pilih File Video
+                    </button>
+                </div>
+
+                <!-- Feature badges -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-2xl mt-12 border-t border-zinc-800 pt-8">
+                    <div class="flex items-start gap-3 text-left">
+                        <div class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center shrink-0 border border-brand-500/20 text-brand-400">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Aman & Terenkripsi</h4>
+                            <p class="text-xs text-zinc-500 mt-1">Data Anda aman karena semua pemrosesan selesai 100% di browser lokal.</p>
+                        </div>
                     </div>
+                    <div class="flex items-start gap-3 text-left">
+                        <div class="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center shrink-0 border border-pink-500/20 text-pink-400">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Tanpa Rendering Cloud</h4>
+                            <p class="text-xs text-zinc-500 mt-1">Sistem kami langsung mengolah piksel lokal, menghemat waktu tunggu upload.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 text-left">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20 text-amber-400">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Analisis AI Gelombang</h4>
+                            <p class="text-xs text-zinc-500 mt-1">Membaca puncak desibel audio secara instan untuk mencari klimaks visual.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 2: Studio Editor & Timeline Workspace -->
+            <div id="editor-stage" class="hidden flex-col">
+                <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-zinc-800">
+                    
+                    <!-- Left: Studio Canvas Viewport (Video Player + Live Audio Waveform) -->
+                    <div class="lg:col-span-7 bg-black p-6 flex flex-col justify-between border-r border-zinc-800 relative">
+                        <div class="w-full h-full flex flex-col justify-center items-center relative aspect-video rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800">
+                            
+                            <!-- Video Node -->
+                            <video id="studio-video" class="max-h-full max-w-full z-10" playsinline></video>
+                            
+                            <!-- Audio Context Analyzer Wave Effect Overlaid -->
+                            <div class="absolute bottom-4 right-4 z-20 flex gap-1 items-end h-8" id="sound-indicator">
+                                <span class="w-1 bg-brand-500 h-2 rounded-full transition-all duration-150"></span>
+                                <span class="w-1 bg-brand-500 h-4 rounded-full transition-all duration-150"></span>
+                                <span class="w-1 bg-brand-500 h-1.5 rounded-full transition-all duration-150"></span>
+                                <span class="w-1 bg-brand-500 h-3 rounded-full transition-all duration-150"></span>
+                            </div>
+                        </div>
+
+                        <!-- Mini Media Controls -->
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <button id="play-pause-btn" class="w-10 h-10 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white flex items-center justify-center border border-zinc-700 shadow-depth-slate active:translate-y-0.5 transition-all">
+                                    <i class="fa-solid fa-play" id="play-icon"></i>
+                                </button>
+                                <span class="text-xs font-mono text-zinc-400" id="current-playback-time">00:00 / 00:00</span>
+                            </div>
+                            
+                            <!-- Active Status Badge -->
+                            <div id="smart-status" class="text-xs text-brand-400 bg-brand-500/10 px-3 py-1.5 border border-brand-500/20 rounded-lg font-medium flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-check"></i> Siap Melakukan Analisis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Intelligent Smart-Clipper Dashboard -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-zinc-900/30">
+                        <div class="space-y-6">
+                            
+                            <!-- Section: AI Smart Automation -->
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-brand-400"></i> Smart Automations (AI)
+                                    </h3>
+                                    <span class="text-[10px] text-brand-400 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-full font-bold">Aktif</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <!-- Auto Peak Highlight button -->
+                                    <button id="ai-peak-btn" class="p-3 bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700 rounded-xl text-left hover-glow shadow-depth-slate active:translate-y-0.5 transition-all flex flex-col group">
+                                        <span class="text-xs font-bold text-white group-hover:text-brand-400 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-bolt text-amber-400"></i> Deteksi Highlight AI
+                                        </span>
+                                        <span class="text-[10px] text-zinc-500 mt-1">Otomatis mencari segmen video paling ramai & klimaks.</span>
+                                    </button>
+                                    
+                                    <!-- Split segment button -->
+                                    <button id="ai-split-btn" class="p-3 bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700 rounded-xl text-left hover-glow shadow-depth-slate active:translate-y-0.5 transition-all flex flex-col group">
+                                        <span class="text-xs font-bold text-white group-hover:text-brand-400 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-clock-rotate-left text-blue-400"></i> Auto 15s Snippet
+                                        </span>
+                                        <span class="text-[10px] text-zinc-500 mt-1">Memotong klip optimal berdurasi pas 15 detik dari tengah.</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Section: Format Aspek Rasio -->
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-crop-simple text-pink-400"></i> Aspek Rasio & Layout Ekspor
+                                </h3>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <button data-ratio="169" class="aspect-ratio-btn p-3 bg-brand-600/10 border-2 border-brand-500 rounded-xl flex flex-col items-center justify-center gap-1 text-white shadow-depth-primary transition-all">
+                                        <i class="fa-solid fa-display text-lg"></i>
+                                        <span class="text-[11px] font-bold">16:9 Landscape</span>
+                                    </button>
+                                    <button data-ratio="916" class="aspect-ratio-btn p-3 bg-zinc-850 border border-zinc-750 hover:border-zinc-600 rounded-xl flex flex-col items-center justify-center gap-1 text-zinc-400 hover:text-white shadow-depth-slate transition-all">
+                                        <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+                                        <span class="text-[11px] font-bold">9:16 Portrait</span>
+                                    </button>
+                                    <button data-ratio="11" class="aspect-ratio-btn p-3 bg-zinc-850 border border-zinc-750 hover:border-zinc-600 rounded-xl flex flex-col items-center justify-center gap-1 text-zinc-400 hover:text-white shadow-depth-slate transition-all">
+                                        <i class="fa-solid fa-square text-lg"></i>
+                                        <span class="text-[11px] font-bold">1:1 Square</span>
+                                    </button>
+                                </div>
+                                <p class="text-[11px] text-zinc-500 mt-2">
+                                    *Format Portrait & Square otomatis menerapkan efek <strong>blurred bokeh background</strong> yang indah.
+                                </p>
+                            </div>
+
+                            <!-- Section: Export Quality Parameters -->
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-teal-400"></i> Resolusi & Format Output
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-zinc-900 border border-zinc-850 rounded-xl p-3 flex flex-col justify-center">
+                                        <label class="text-[10px] font-bold text-zinc-500 uppercase">Kualitas Piksel</label>
+                                        <select id="export-quality" class="bg-transparent text-xs font-bold text-white mt-1 outline-none cursor-pointer">
+                                            <option value="1080" class="bg-zinc-900 text-white">Full HD (1080p)</option>
+                                            <option value="720" selected class="bg-zinc-900 text-white">HD Standard (720p)</option>
+                                            <option value="480" class="bg-zinc-900 text-white">Data Saver (480p)</option>
+                                        </select>
+                                    </div>
+                                    <div class="bg-zinc-900 border border-zinc-850 rounded-xl p-3 flex flex-col justify-center">
+                                        <label class="text-[10px] font-bold text-zinc-500 uppercase">Ekstensi File</label>
+                                        <select id="export-format" class="bg-transparent text-xs font-bold text-white mt-1 outline-none cursor-pointer">
+                                            <option value="webm" selected class="bg-zinc-900 text-white">WebM (Optimal & Cepat)</option>
+                                            <option value="mp4" class="bg-zinc-900 text-white">MP4 Container (Kompatibel)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Action Controls: Bottom of Card -->
+                        <div class="flex flex-col sm:flex-row items-center gap-3 mt-8 border-t border-zinc-800 pt-6">
+                            <!-- Change video btn -->
+                            <button id="discard-video-btn" class="w-full sm:w-auto px-5 py-3 text-sm font-bold text-zinc-400 hover:text-white bg-zinc-800 hover:bg-zinc-700 rounded-xl border border-zinc-750 hover:border-zinc-650 shadow-depth-slate active:translate-y-0.5 transition-all">
+                                <i class="fa-solid fa-rotate-left mr-1.5"></i> Ganti File
+                            </button>
+                            
+                            <!-- Process & compile button -->
+                            <button id="render-clip-btn" class="w-full sm:flex-grow px-6 py-3.5 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-600 text-white font-extrabold rounded-xl shadow-depth-primary hover:shadow-depth-primary-hover active:shadow-depth-primary-active active:translate-y-0.5 transition-all flex items-center justify-center gap-2 text-sm">
+                                <i class="fa-solid fa-scissors"></i> Kompilasi & Ekspor Klip
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Timeline & Waveform Editor Control Panel (Full Width) -->
+                <div class="p-6 bg-zinc-950 border-t border-zinc-900">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <div>
+                            <h4 class="text-sm font-extrabold text-white">Atur Interval Rentang Klip</h4>
+                            <p class="text-xs text-zinc-500 mt-1">Geser tuas di bawah ini atau arahkan kursor untuk mengatur titik mulai dan selesai.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-zinc-900 px-4 py-2 rounded-xl border border-zinc-800 text-center">
+                                <span class="block text-[9px] font-bold text-zinc-500 uppercase">Mulai</span>
+                                <span class="text-xs font-mono font-bold text-white" id="start-time-val">00:00.0</span>
+                            </div>
+                            <div class="bg-zinc-900 px-4 py-2 rounded-xl border border-zinc-800 text-center">
+                                <span class="block text-[9px] font-bold text-zinc-500 uppercase">Selesai</span>
+                                <span class="text-xs font-mono font-bold text-white" id="end-time-val">00:00.0</span>
+                            </div>
+                            <div class="bg-brand-500/10 px-4 py-2 rounded-xl border border-brand-500/20 text-center">
+                                <span class="block text-[9px] font-bold text-brand-400 uppercase">Total Klip</span>
+                                <span class="text-xs font-mono font-bold text-brand-400" id="duration-time-val">0s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Waveform Timeline -->
+                    <div class="relative bg-zinc-900 rounded-xl p-4 border border-zinc-800 overflow-hidden mb-2">
+                        
+                        <!-- Real Waveform Canvas -->
+                        <div class="relative w-full h-16 flex items-center" id="waveform-wrapper">
+                            <!-- Procedural visual loader before arraybuffer decodes -->
+                            <div id="waveform-placeholder" class="absolute inset-0 flex justify-center items-center text-xs text-zinc-600 gap-2">
+                                <i class="fa-solid fa-spinner animate-spin"></i> Mendekode bentuk gelombang audio video...
+                            </div>
+                            <canvas id="waveform-canvas" class="absolute w-full h-full left-0 top-0 pointer-events-none z-10"></canvas>
+                        </div>
+
+                        <!-- Multi-Thumb Range Slider Logic -->
+                        <div class="relative w-full h-8 flex items-center mt-2 range-slider-container">
+                            <div class="absolute w-full h-1.5 bg-zinc-800 rounded-full"></div>
+                            
+                            <!-- Highlight range track selected -->
+                            <div id="timeline-track-highlight" class="absolute h-1.5 bg-brand-500 rounded-full" style="left: 0%; right: 0%;"></div>
+                            
+                            <!-- Raw Inputs -->
+                            <input type="range" id="clip-start-range" min="0" max="100" value="0" step="0.05" class="z-30">
+                            <input type="range" id="clip-end-range" min="0" max="100" value="100" step="0.05" class="z-30">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 3: Export Compiling & Progress View -->
+            <div id="exporting-stage" class="hidden p-8 sm:p-16 flex-col items-center justify-center text-center">
+                <div class="w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col items-center">
+                    
+                    <!-- Dynamic Loading Sphere -->
+                    <div class="relative w-24 h-24 mb-6">
+                        <!-- Outer rotating border -->
+                        <div class="absolute inset-0 rounded-full border-4 border-zinc-800 border-t-brand-500 animate-spin"></div>
+                        <!-- Inner glowing logo -->
+                        <div class="absolute inset-2 bg-zinc-950 rounded-full flex items-center justify-center border border-zinc-800 shadow-inner">
+                            <i class="fa-solid fa-scissors text-2xl text-brand-400 animate-pulse"></i>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-extrabold text-white mb-2" id="export-status-title">Memotong & Merender Klip</h3>
+                    <p class="text-zinc-500 text-sm mb-8 leading-relaxed">
+                        Sistem sedang merekam ulang dan menggabungkan audio track asli. Jangan tutup tab browser ini sampai selesai.
+                    </p>
+
+                    <!-- Real Processing Canvas (Secret weapon for no lag/no fake simulations) -->
+                    <!-- This canvas is styled & visible as real-time compiling monitor -->
+                    <div class="w-full max-w-sm aspect-video rounded-xl overflow-hidden bg-black border border-zinc-800 mb-6 relative">
+                        <canvas id="compilation-canvas" class="w-full h-full object-contain"></canvas>
+                        <div class="absolute top-2 left-2 px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-zinc-700/50 text-[10px] text-zinc-300 uppercase tracking-widest font-bold">
+                            <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse mr-1"></span> Render Monitor
+                        </div>
+                    </div>
+
+                    <div class="w-full bg-zinc-950 rounded-full h-3 border border-zinc-800 overflow-hidden mb-3">
+                        <div id="compile-progress-bar" class="bg-gradient-to-r from-brand-600 to-purple-400 h-full w-0 transition-all duration-150 ease-out"></div>
+                    </div>
+                    
+                    <div class="flex justify-between w-full text-xs font-semibold text-zinc-400 font-mono">
+                        <span id="compile-progress-percent">0%</span>
+                        <span id="compile-progress-time">0.0s / 0.0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 4: Final Screen & Free Download -->
+            <div id="success-stage" class="hidden p-8 sm:p-16 flex-col items-center justify-center text-center">
+                <div class="w-20 h-20 rounded-full bg-emerald-500/10 border-2 border-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mb-6 shadow-[0_0_30px_rgba(16,185,129,0.15)] animate-bounce">
+                    <i class="fa-solid fa-check-double"></i>
                 </div>
                 
-                <!-- Center Info Bar - High Trust badges -->
-                <div class="hidden lg:flex items-center gap-6">
-                    <div class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-brand-500"></i>
-                        Tanpa Pendaftaran
-                    </div>
-                    <div class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
-                        <i data-lucide="zap" class="w-4 h-4 text-accent-500"></i>
-                        100% Gratis
-                    </div>
+                <h3 class="text-3xl font-extrabold text-white mb-2">Klip Anda Berhasil Diproduksi!</h3>
+                <p class="text-zinc-500 text-sm max-w-md mb-8 leading-relaxed">
+                    Klip video beresolusi tinggi siap diunduh sepenuhnya gratis. Tidak ada tanda air (watermark) atau batasan.
+                </p>
+
+                <!-- Final Video Preview Box -->
+                <div class="w-full max-w-lg aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 mb-8 shadow-2xl relative">
+                    <video id="final-video-element" class="w-full h-full object-contain" controls></video>
                 </div>
 
-                <!-- Call to Action Buttons -->
-                <div class="flex items-center gap-4">
-                    <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping absolute"></span>
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 relative"></span>
-                        Engine v2.5
-                    </span>
-                    <button onclick="scrollToApp()" class="btn-3d-interact hidden sm:block bg-brand-950 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-3d-btn-dark hover:shadow-3d-btn-dark-hover border border-slate-800">
-                        Mulai Studio
+                <!-- Action Button Matrix -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+                    <!-- New Clip Btn -->
+                    <button id="reset-workspace-btn" class="w-full sm:w-auto px-6 py-4 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl border border-zinc-700 shadow-depth-slate active:translate-y-0.5 transition-all text-sm">
+                        <i class="fa-solid fa-repeat mr-2"></i> Buat Klip Baru
                     </button>
+                    
+                    <!-- Direct Premium Download Link -->
+                    <a id="download-final-btn" href="#" download="IkoAlmas_Clipper_Result.webm"
+                       class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-600 text-white font-extrabold rounded-xl shadow-depth-primary hover:shadow-depth-primary-hover active:shadow-depth-primary-active active:translate-y-0.5 transition-all text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-arrow-down"></i> Unduh Sekarang (Free)
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Trust & Technology Indicators -->
+        <div class="mt-16 text-center" id="features">
+            <h3 class="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-6">Didukung & Diuji pada Framework Terdepan</h3>
+            <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-16 opacity-50 grayscale hover:opacity-80 transition-opacity duration-300">
+                <span class="text-lg font-extrabold text-white tracking-wider flex items-center gap-2"><i class="fa-brands fa-html5 text-xl"></i> HTML5 CANVAS</span>
+                <span class="text-lg font-extrabold text-white tracking-wider flex items-center gap-2"><i class="fa-brands fa-chrome text-xl"></i> WEB CODECS</span>
+                <span class="text-lg font-extrabold text-white tracking-wider flex items-center gap-2"><i class="fa-solid fa-music text-lg"></i> WEB AUDIO API</span>
+            </div>
+        </div>
+
+        <!-- Privacy & Security Notice Block -->
+        <div class="mt-12 bg-zinc-900/40 rounded-2xl border border-zinc-800/80 p-6 max-w-3xl mx-auto" id="privacy">
+            <div class="flex flex-col sm:flex-row items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Garansi Privasi Tanpa Kompromi</h4>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                        Kami sepenuhnya menolak pemrosesan video di cloud server untuk menjamin keamanan privasi Anda. Semua pemrosesan kliping, pembuatan waveform, kompilasi, rendering bokeh blur, dan audio blending diselesaikan secara internal di dalam sandbox runtime memori browser Anda menggunakan teknologi modern browser lokal.
+                    </p>
                 </div>
             </div>
         </div>
-    </nav>
-
-    <main class="flex-grow pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex flex-col">
-        
-        <header class="text-center max-w-4xl mx-auto mb-16">
-            <!-- Decorative Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-brand-50 to-indigo-50 text-brand-600 text-xs font-bold uppercase tracking-wider mb-6 border border-brand-100 shadow-sm">
-                <i data-lucide="sparkles" class="w-4 h-4 text-brand-500"></i>
-                POTONG VIDEO & UNDUH TANPA RIBET PENDAFTARAN
-            </div>
-            
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 leading-tight">
-                Editor Klip AI Otomatis <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-indigo-500 to-accent-500">
-                    Bebas Unduh & Tanpa Login.
-                </span>
-            </h1>
-            
-            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8">
-                Ambil sorotan terbaik dari rekaman panjang Anda, pasang caption otomatis, dan optimalkan ukuran untuk konten Reels, TikTok, atau Shorts secara instan dan aman.
-            </p>
-
-            <!-- Curated Test Video Triggers -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Coba Demo Instan:</span>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button onclick="loadSampleVideo('podcast')" class="btn-3d-interact px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors flex items-center gap-2 shadow-sm">
-                        <i data-lucide="mic" class="w-4 h-4 text-indigo-500"></i> Podcast Inspiratif
-                    </button>
-                    <button onclick="loadSampleVideo('tech')" class="btn-3d-interact px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors flex items-center gap-2 shadow-sm">
-                        <i data-lucide="cpu" class="w-4 h-4 text-brand-500"></i> Review Gadget
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <section id="app-workspace" class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-            
-            <!-- LEFT WORKSPACE: Video Import & Timeline & Layout Customization (7 cols) -->
-            <div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-8">
-                
-                <!-- Main Control Card -->
-                <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200/80">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2.5">
-                            <i data-lucide="video" class="w-6 h-6 text-brand-500"></i> Video Lab Studio
-                        </h2>
-                        <span class="text-xs font-bold text-brand-600 bg-brand-50 px-3 py-1.5 rounded-lg border border-brand-100 flex items-center gap-1.5">
-                            <i data-lucide="lock" class="w-3.5 h-3.5"></i> Local Safe Engine
-                        </span>
-                    </div>
-
-                    <!-- Input / Upload Frame State -->
-                    <div id="upload-stage" class="relative group">
-                        <div id="dropzone" class="upload-zone border-2 border-dashed border-slate-300 hover:border-brand-500 rounded-2xl flex flex-col items-center justify-center p-12 cursor-pointer transition-all bg-slate-50/50 hover:bg-brand-50/20 min-h-[380px]">
-                            <input type="file" id="video-file-picker" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="video/*" />
-                            
-                            <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-5 shadow-md group-hover:scale-105 transition-transform border border-slate-100 group-hover:shadow-lg">
-                                <i data-lucide="file-video" class="w-10 h-10 text-brand-500"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 mb-2">Seret Video Anda di Sini</h3>
-                            <p class="text-sm text-slate-500 text-center max-w-sm mb-6 leading-relaxed">
-                                Atau klik untuk memilih berkas dari perangkat Anda. Mendukung MP4, MOV, WebM (Max 1GB).
-                            </p>
-                            
-                            <!-- Trust Info -->
-                            <div class="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-                                <i data-lucide="shield-alert" class="w-4 h-4 text-emerald-500"></i>
-                                Diproses secara offline - Data Anda 100% aman
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Interactive Studio Player State (Hidden initially) -->
-                    <div id="player-stage" class="hidden flex flex-col">
-                        
-                        <!-- Main Preview Mask Screen - FIXED Aspect Ratio Container -->
-                        <div class="relative w-full bg-slate-950 rounded-2xl overflow-hidden aspect-video flex items-center justify-center shadow-lg border border-slate-800 group">
-                            
-                            <!-- Hidden HTML5 Video Target -->
-                            <video id="studio-video" class="hidden" preload="auto" loop muted playsinline></video>
-
-                            <!-- Virtual Rendering Canvas (Responsible for standardizing layout & drawing crops cleanly) -->
-                            <canvas id="studio-canvas" class="w-full h-full object-contain pointer-events-none"></canvas>
-                            
-                            <!-- AI Dynamic Caption Template Overlay Simulation -->
-                            <div id="caption-overlay" class="absolute bottom-10 left-4 right-4 pointer-events-none text-center hidden">
-                                <span id="caption-text" class="px-4 py-2 rounded-lg font-extrabold text-lg sm:text-2xl uppercase tracking-wide inline-block drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-all duration-100">
-                                    "KLIP VIDEO INI SANGAT BERHARGA!"
-                                </span>
-                            </div>
-
-                            <!-- Overlay Player Buttons -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-5 pointer-events-none">
-                                <div class="pointer-events-auto flex items-center gap-3">
-                                    <button id="btn-play-pause" class="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-lg">
-                                        <i data-lucide="play" class="w-6 h-6 ml-1" id="play-icon"></i>
-                                    </button>
-                                    <button id="btn-audio" class="w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
-                                        <i data-lucide="volume-x" class="w-5 h-5" id="audio-icon"></i>
-                                    </button>
-                                </div>
-                                <span id="studio-time-display" class="text-sm font-semibold text-white bg-black/60 px-3 py-1.5 rounded-lg backdrop-blur font-mono border border-white/10">00:00 / 00:00</span>
-                            </div>
-                        </div>
-
-                        <!-- Editor Timeline Control -->
-                        <div class="mt-8">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Kontrol Potongan Manual</span>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-xs font-bold text-brand-700 bg-brand-100 px-3 py-1 rounded-md border border-brand-200" id="trim-duration-badge">Durasi: 15 detik</span>
-                                </div>
-                            </div>
-
-                            <!-- Timeline Slider Assembly -->
-                            <div class="relative px-3 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl mb-4">
-                                <!-- Waveform visualizer simulation -->
-                                <div class="absolute inset-x-3 bottom-4 top-4 flex items-center justify-between pointer-events-none opacity-30 px-1 gap-0.5">
-                                    <!-- Dynamic bars representing video waveform -->
-                                    <div class="flex-1 h-3/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-5/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-full bg-slate-600 rounded-sm"></div>
-                                    <div class="flex-1 h-4/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-2/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-3/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-full bg-slate-600 rounded-sm"></div>
-                                    <div class="flex-1 h-5/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-4/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-2/6 bg-slate-300 rounded-sm"></div>
-                                    <div class="flex-1 h-3/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-5/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-full bg-slate-600 rounded-sm"></div>
-                                    <div class="flex-1 h-4/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-2/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-4/6 bg-slate-400 rounded-sm"></div>
-                                    <div class="flex-1 h-5/6 bg-slate-500 rounded-sm"></div>
-                                    <div class="flex-1 h-3/6 bg-slate-400 rounded-sm"></div>
-                                </div>
-
-                                <!-- Actual Sliders Layer -->
-                                <div class="relative h-8 flex items-center">
-                                    <div class="slider-track w-full"></div>
-                                    <div id="slider-range" class="slider-progress absolute shadow-sm" style="left: 0%; right: 50%;"></div>
-                                    
-                                    <!-- Double Range Input Handles (Overlay) -->
-                                    <input type="range" id="trim-start-range" min="0" max="100" value="0" class="absolute w-full h-full opacity-0 pointer-events-auto z-20">
-                                    <input type="range" id="trim-end-range" min="0" max="100" value="50" class="absolute w-full h-full opacity-0 pointer-events-auto z-20">
-
-                                    <!-- Styled Handles Visuals -->
-                                    <div id="handle-start-visual" class="absolute w-5 h-5 bg-white border-[3px] border-brand-500 rounded-full shadow-md z-30 pointer-events-none slider-handle-visual"></div>
-                                    <div id="handle-end-visual" class="absolute w-5 h-5 bg-white border-[3px] border-accent-500 rounded-full shadow-md z-30 pointer-events-none slider-handle-visual"></div>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-between items-center text-sm text-slate-500 px-1 font-bold">
-                                <span id="trim-start-time" class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4"></i> Mulai: 00:00</span>
-                                <span id="trim-end-time" class="flex items-center gap-1.5">Selesai: 00:30 <i data-lucide="clock" class="w-4 h-4"></i></span>
-                            </div>
-                        </div>
-
-                        <!-- Reset Video Trigger -->
-                        <div class="mt-8 pt-6 border-t border-slate-200 flex justify-between items-center">
-                            <div class="truncate max-w-[250px] sm:max-w-sm">
-                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-0.5">Berkas Proyek Aktif</p>
-                                <p id="active-filename" class="text-base font-bold text-slate-800 truncate">demo_video_sample.mp4</p>
-                            </div>
-                            <button onclick="unloadVideo()" class="btn-3d-interact border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-bold text-sm px-5 py-2.5 rounded-xl shadow-sm transition-colors">
-                                <i data-lucide="refresh-cw" class="w-4 h-4 inline mr-1.5"></i> Ganti Berkas
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div id="customize-panel" class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200/80">
-                    <h3 class="text-lg font-extrabold text-slate-800 flex items-center gap-2.5 mb-6">
-                        <i data-lucide="sliders" class="w-5 h-5 text-indigo-500"></i> Aturan Visual & Rasio
-                    </h3>
-
-                    <!-- Layout Presets Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                        
-                        <!-- Portrait 9:16 -->
-                        <button onclick="setStudioAspect('9-16')" id="btn-aspect-9-16" class="aspect-btn p-4 rounded-2xl bg-brand-50/50 border-2 border-brand-500 text-left flex flex-col justify-between transition-all group">
-                            <div class="flex justify-between items-center w-full mb-4">
-                                <div class="w-7 h-12 bg-brand-200 rounded border border-brand-400 flex items-center justify-center text-[10px] text-brand-700 font-bold group-hover:scale-105 transition-transform">9:16</div>
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-500" id="icon-aspect-9-16"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-sm text-slate-800">Vertical Clip</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">TikTok, Reels, Shorts</p>
-                            </div>
-                        </button>
-
-                        <!-- Square 1:1 -->
-                        <button onclick="setStudioAspect('1-1')" id="btn-aspect-1-1" class="aspect-btn p-4 rounded-2xl bg-white border-2 border-slate-100 hover:border-slate-300 text-left flex flex-col justify-between transition-all group">
-                            <div class="flex justify-between items-center w-full mb-4">
-                                <div class="w-10 h-10 bg-slate-100 rounded border border-slate-300 flex items-center justify-center text-[10px] text-slate-500 font-bold group-hover:scale-105 transition-transform">1:1</div>
-                                <i data-lucide="circle" class="w-5 h-5 text-slate-300" id="icon-aspect-1-1"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-sm text-slate-800">Square Feed</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Instagram Feed, FB</p>
-                            </div>
-                        </button>
-
-                        <!-- Landscape 16:9 -->
-                        <button onclick="setStudioAspect('16-9')" id="btn-aspect-16-9" class="aspect-btn p-4 rounded-2xl bg-white border-2 border-slate-100 hover:border-slate-300 text-left flex flex-col justify-between transition-all group">
-                            <div class="flex justify-between items-center w-full mb-4">
-                                <div class="w-14 h-8 bg-slate-100 rounded border border-slate-300 flex items-center justify-center text-[10px] text-slate-500 font-bold group-hover:scale-105 transition-transform">16:9</div>
-                                <i data-lucide="circle" class="w-5 h-5 text-slate-300" id="icon-aspect-16-9"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-sm text-slate-800">Landscape Mode</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">YouTube, Desktop</p>
-                            </div>
-                        </button>
-
-                    </div>
-
-                    <!-- Caption Styles Selection -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Gaya Teks Otomatis (Caption AI)</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            
-                            <!-- TikTok Style -->
-                            <button onclick="setCaptionStyle('tiktok')" id="btn-style-tiktok" class="caption-style-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50/30 text-center transition-all">
-                                <span class="block font-extrabold text-sm text-slate-800 mb-0.5">TikTok Bold</span>
-                                <span class="text-[10px] text-slate-500 font-medium">Yellow + Stroke</span>
-                            </button>
-
-                            <!-- Clean Minimal -->
-                            <button onclick="setCaptionStyle('minimal')" id="btn-style-minimal" class="caption-style-btn p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 text-center transition-all">
-                                <span class="block font-bold text-sm text-slate-800 mb-0.5">Minimalist</span>
-                                <span class="text-[10px] text-slate-500 font-medium">White Box Base</span>
-                            </button>
-
-                            <!-- Podcast Neon -->
-                            <button onclick="setCaptionStyle('neon')" id="btn-style-neon" class="caption-style-btn p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 text-center transition-all">
-                                <span class="block font-extrabold text-sm text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 mb-0.5">Electric</span>
-                                <span class="text-[10px] text-slate-500 font-medium">Neon Glow Border</span>
-                            </button>
-
-                            <!-- Non-captions -->
-                            <button onclick="setCaptionStyle('none')" id="btn-style-none" class="caption-style-btn p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 text-center transition-all">
-                                <span class="block font-medium text-sm text-slate-600 mb-0.5">Tanpa Teks</span>
-                                <span class="text-[10px] text-slate-500 font-medium">Pure Video Only</span>
-                            </button>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT WORKSPACE: AI Clipping Generator & Final Downloads (5 cols -> 4 cols xl) -->
-            <div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-8">
-                
-                <!-- AI Engine Panel -->
-                <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200/80 relative overflow-hidden flex flex-col min-h-[500px]">
-                    
-                    <div class="flex justify-between items-center mb-8 z-10">
-                        <div>
-                            <h2 class="text-lg font-extrabold text-slate-800 flex items-center gap-2">
-                                <i data-lucide="sparkles" class="w-5 h-5 text-accent-500 animate-pulse"></i> AI Highlight Catcher
-                            </h2>
-                            <p class="text-xs text-slate-500 font-medium mt-1">Biar mesin mencari momentum viral.</p>
-                        </div>
-                        <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-200 uppercase tracking-wider">Gratis</span>
-                    </div>
-
-                    <!-- Empty State / Blocked until video imported -->
-                    <div id="ai-clipping-empty-state" class="flex-grow flex flex-col items-center justify-center text-center py-10 z-10">
-                        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 mb-5 border border-slate-200">
-                            <i data-lucide="scissors" class="w-8 h-8"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-800 text-lg mb-2">Menunggu Berkas</h4>
-                        <p class="text-sm text-slate-500 max-w-xs leading-relaxed">
-                            Pilih video demo atau unggah milik Anda di panel kiri untuk membuka fitur ekstraksi otomatis.
-                        </p>
-                    </div>
-
-                    <!-- Ready State with CTA (Hidden initially) -->
-                    <div id="ai-clipping-ready-state" class="hidden flex-grow flex flex-col justify-between z-10">
-                        
-                        <div class="bg-indigo-50/60 border border-indigo-100 rounded-2xl p-4 mb-6 shadow-sm">
-                            <h4 class="text-sm font-bold text-indigo-900 flex items-center gap-2 mb-2">
-                                <i data-lucide="info" class="w-4 h-4 text-indigo-500"></i> Analisis Cerdas AI
-                            </h4>
-                            <p class="text-xs text-indigo-700 leading-relaxed font-medium">
-                                AI kami memindai frekuensi audio, intensitas dialog, dan mendeteksi segmen mana yang paling berpotensi menarik retensi penonton tinggi.
-                            </p>
-                        </div>
-
-                        <!-- Parameter Tuning for AI Potongan -->
-                        <div class="space-y-4 mb-8">
-                            <div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Target Durasi Otomatis</label>
-                                    <span class="text-xs font-bold text-indigo-600">Terbaik (15-45s)</span>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <button class="py-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-700 shadow-sm transition-all hover:bg-indigo-100">Singkat</button>
-                                    <button class="py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-600 hover:border-slate-300 transition-all shadow-sm">Sedang</button>
-                                    <button class="py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-600 hover:border-slate-300 transition-all shadow-sm">Panjang</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CTA Dynamic Depth button -->
-                        <button onclick="triggerAIClipping()" class="btn-3d-interact w-full bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold text-sm py-4 rounded-2xl shadow-3d-btn hover:shadow-3d-btn-hover flex items-center justify-center gap-2.5 border border-brand-500">
-                            <i data-lucide="wand" class="w-5 h-5"></i> Ekstrak Highlight (Gratis)
-                        </button>
-                    </div>
-
-                    <!-- Loading / Analysis state (Hidden initially) -->
-                    <div id="ai-clipping-processing-state" class="hidden flex-grow flex flex-col items-center justify-center py-8 z-10">
-                        <div class="relative w-24 h-24 mb-6">
-                            <!-- Floating decorative rings -->
-                            <div class="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
-                            <div class="absolute inset-0 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                            <div class="absolute inset-2 border-4 border-brand-400 border-b-transparent rounded-full animate-spin-reverse"></div>
-                        </div>
-                        <h4 class="font-extrabold text-slate-800 text-lg mb-2" id="process-headline">Memindai Klip Terbaik...</h4>
-                        <p class="text-sm text-slate-500 text-center max-w-xs leading-relaxed" id="process-subtext">Mengekstrak suara, mendeteksi topik, dan memilah puncak grafik audio.</p>
-                        
-                        <!-- Mini progress bar -->
-                        <div class="w-full max-w-xs bg-slate-100 h-3 rounded-full overflow-hidden mt-8 border border-slate-200 shadow-inner">
-                            <div id="ai-processing-bar" class="h-full bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300" style="width: 5%"></div>
-                        </div>
-                    </div>
-
-                    <!-- Results Output List (Hidden initially) -->
-                    <div id="ai-clipping-result-state" class="hidden flex-grow flex flex-col z-10">
-                        
-                        <!-- Header metadata of the result -->
-                        <div class="flex justify-between items-center mb-5">
-                            <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Highlight Terbaik Ditemukan</span>
-                            <button onclick="resetAIClipping()" class="text-xs font-bold text-brand-600 hover:text-brand-700 bg-brand-50 px-2 py-1 rounded hover:bg-brand-100 transition-colors">Ulangi</button>
-                        </div>
-
-                        <!-- Generated Clips Loop -->
-                        <div class="space-y-3 overflow-y-auto max-h-[350px] pr-2 custom-scroll" id="result-clips-list">
-                            <!-- Injected by JS -->
-                        </div>
-
-                        <!-- Immediate Action box after result -->
-                        <div class="mt-6 pt-6 border-t border-slate-200">
-                            <!-- Free Direct Download Button - NO LOGIN -->
-                            <button onclick="triggerPremiumExport()" class="btn-3d-interact w-full bg-gradient-to-r from-accent-600 via-purple-600 to-indigo-600 text-white font-bold text-sm py-4 rounded-2xl shadow-3d-btn-purple hover:shadow-3d-btn-purple-hover flex items-center justify-center gap-2 border border-purple-500">
-                                <i data-lucide="download" class="w-5 h-5"></i> Unduh Klip Terpilih (Gratis)
-                            </button>
-                            <div class="flex items-center justify-center gap-2 mt-4 text-slate-500 text-xs font-semibold">
-                                <i data-lucide="unlock" class="w-4 h-4 text-emerald-500"></i> Langsung Unduh • MP4 Kualitas Asli
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
 
     </main>
 
-    <div id="export-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onclick="closeExportModal()"></div>
-        
-        <div class="glass-card max-w-md w-full rounded-3xl overflow-hidden shadow-2xl relative z-10 border border-slate-200 m-4">
-            <div class="p-8 text-center flex flex-col items-center">
-                
-                <!-- Graphic Simulation of Render -->
-                <div class="w-24 h-24 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-6 relative shadow-inner border border-indigo-100">
-                    <i data-lucide="video" class="w-12 h-12 animate-bounce"></i>
-                    <span class="absolute -top-2 -right-2 flex h-5 w-5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-5 w-5 bg-emerald-500 border-2 border-white"></span>
-                    </span>
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 bg-black mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center border border-zinc-700">
+                    <i class="fa-solid fa-scissors text-sm text-zinc-400"></i>
                 </div>
-
-                <h3 class="text-2xl font-extrabold text-slate-900 mb-3">Merender Potongan Video</h3>
-                <p class="text-sm text-slate-500 mb-8 max-w-xs leading-relaxed font-medium">
-                    Sedang membungkus berkas potongan ke dalam resolusi terbaik tanpa menurunkan kualitas aslinya.
-                </p>
-
-                <!-- Rendering progress status -->
-                <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden mb-3 border border-slate-200 shadow-inner">
-                    <div id="render-bar-progress" class="h-full bg-gradient-to-r from-indigo-500 via-brand-500 to-indigo-500 transition-all duration-300 relative" style="width: 0%">
-                        <div class="absolute inset-0 bg-white/20 w-full h-full shimmer-anim"></div>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full text-xs font-bold text-slate-500 mb-8">
-                    <span id="render-status-label">Mengonversi format audio...</span>
-                    <span id="render-percent-label" class="text-brand-600">0%</span>
-                </div>
-
-                <!-- Custom download success notification -->
-                <div id="render-complete-notice" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-2xl w-full mb-6 text-left flex items-start gap-3 shadow-sm">
-                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0">
-                        <i data-lucide="check" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm text-emerald-800 mb-1">Klip Berhasil Dibuat!</h4>
-                        <p class="text-xs text-emerald-700 leading-relaxed font-medium">
-                            Proses selesai. Unduhan gratis Anda sedang berjalan secara otomatis.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Modal Action buttons -->
-                <div class="w-full flex gap-3">
-                    <button onclick="closeExportModal()" id="btn-modal-close" class="btn-3d-interact flex-1 border border-slate-300 bg-white hover:bg-slate-50 hover:text-slate-900 text-slate-600 font-bold text-sm py-4 rounded-xl shadow-sm transition-colors">
-                        Batalkan
-                    </button>
-                    <a id="btn-modal-download" class="hidden btn-3d-interact flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-sm py-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2 border border-emerald-500 transition-colors">
-                        <i data-lucide="download" class="w-5 h-5"></i> Simpan File
-                    </a>
-                </div>
-
+                <span class="text-sm font-semibold text-zinc-400">© 2026 IkoAlmas Clipper, Inc. All rights reserved.</span>
             </div>
-        </div>
-    </div>
-
-    <div id="custom-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-400 ease-out">
-        <div class="glass-card px-5 py-4 rounded-2xl border border-slate-200 shadow-2xl flex items-center gap-4">
-            <div id="toast-icon-bg" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 shadow-sm border border-indigo-100">
-                <i data-lucide="info" class="w-5 h-5" id="toast-icon"></i>
-            </div>
-            <div>
-                <h4 id="toast-title" class="font-bold text-sm text-slate-800">Notifikasi</h4>
-                <p id="toast-desc" class="text-xs text-slate-500 mt-1 font-medium">Deskripsi pesan berjalan lancar.</p>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3 text-white mb-5">
-                        <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center">
-                            <i data-lucide="scissors" class="w-5 h-5 text-slate-900"></i>
-                        </div>
-                        <span class="font-extrabold text-2xl tracking-tight">IkoAlmas<span class="text-brand-500 font-light">.clipper</span></span>
-                    </div>
-                    <p class="text-sm text-slate-500 leading-relaxed max-w-sm mb-6">
-                        Platform web-editor berstandar industri. Membantu kreator mengonversi video panjang menjadi format mini klip viral yang dioptimalkan untuk berbagai perangkat.
-                    </p>
-                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-900 px-3 py-1.5 rounded-full inline-block">
-                        <i data-lucide="shield-check" class="w-4 h-4 inline mr-1.5 align-text-bottom"></i> 100% Pemrosesan Lokal Aman
-                    </span>
-                </div>
-
-                <div>
-                    <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-5">Teknologi</h4>
-                    <ul class="space-y-3 text-sm text-slate-500 font-medium">
-                        <li><a href="#" class="hover:text-brand-400 transition-colors">Local HTML5 Renderer</a></li>
-                        <li><a href="#" class="hover:text-brand-400 transition-colors">Visual Canvas API</a></li>
-                        <li><a href="#" class="hover:text-brand-400 transition-colors">Simulated AI Pitcher</a></li>
-                        <li><a href="#" class="hover:text-brand-400 transition-colors">Zero-Server Engine</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-5">Lisensi & Keuntungan</h4>
-                    <ul class="space-y-3 text-sm text-slate-500 font-medium">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Gratis Tanpa Akun</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Tanpa Watermark</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Aman untuk Komersial</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="pt-8 border-t border-slate-800 text-center md:flex md:justify-between md:items-center text-xs text-slate-500 font-semibold">
-                <p>&copy; 2026 IkoAlmas Firm. Seluruh Hak Cipta Dilindungi.</p>
-                <div class="flex justify-center gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">Persyaratan</a>
-                    <a href="#" class="hover:text-white transition-colors">Privasi</a>
-                    <a href="#" class="hover:text-white transition-colors">Bantuan</a>
-                </div>
+            
+            <div class="flex gap-6 text-xs text-zinc-500">
+                <a href="#" class="hover:text-zinc-300">Pernyataan Privasi</a>
+                <a href="#" class="hover:text-zinc-300">Ketentuan Layanan</a>
+                <a href="#" class="hover:text-zinc-300">Hubungi Kami</a>
             </div>
         </div>
     </footer>
 
+    <!-- Core Application Logic -->
     <script>
-        // Init vector icons globally
-        lucide.createIcons();
-
-        // Sample Videos Source mapping (Mocked clean assets from high-performance stock library for dynamic testing)
-        const sampleAssets = {
-            podcast: {
-                url: "https://assets.mixkit.co/videos/preview/mixkit-holding-a-microphone-close-up-of-a-man-singing-or-speaking-41584-large.mp4",
-                title: "Inspirational Podcast Snippet.mp4",
-                clips: [
-                    { title: "Pola Pikir Pemenang", start: 2, duration: 12, score: 99, tags: ["Inspirasi", "Mindset"] },
-                    { title: "Kunci Konsistensi Diri", start: 16, duration: 15, score: 92, tags: ["Edukasi", "Fokus"] },
-                    { title: "Mengatasi Rasa Takut", start: 35, duration: 10, score: 87, tags: ["Motivasi", "Mental"] }
-                ]
-            },
-            tech: {
-                url: "https://assets.mixkit.co/videos/preview/mixkit-young-man-playing-a-video-game-with-a-controller-42289-large.mp4",
-                title: "Next-Gen Console Tech Review.mp4",
-                clips: [
-                    { title: "Unboxing Desain Futuristik", start: 1, duration: 14, score: 97, tags: ["Review", "Tech"] },
-                    { title: "Uji Coba Performa Grafik", start: 18, duration: 12, score: 91, tags: ["Gaming", "FPS"] },
-                    { title: "Rekomendasi Belanja", start: 32, duration: 18, score: 85, tags: ["Tips", "Belanja"] }
-                ]
-            }
-        };
-
-        // Application State
-        let activeVideoUrl = null;
-        let activeVideoTitle = "";
-        let duration = 0;
-        let aspectSelected = '9-16'; // '9-16' | '1-1' | '16-9'
-        let captionStyleSelected = 'tiktok'; // 'tiktok' | 'minimal' | 'neon' | 'none'
-        let clipSegments = [];
-        let renderInterval = null;
-        let frameRateAnimationId = null;
-
-        // Custom Subtitles pool used to simulate reading dialogue in the video dynamic text overlay
-        const demoSubtitles = [
-            { time: 0, text: "Selamat datang di era baru kecerdasan buatan." },
-            { time: 3, text: "Seringkali kita merasa tidak memiliki waktu yang cukup." },
-            { time: 6, text: "Padahal kuncinya ada pada fokus dan prioritas hidup kita." },
-            { time: 10, text: "Mulailah menyederhanakan tugas-tugas harian Anda!" },
-            { time: 14, text: "Potong video panjang jadi ringkas dalam 1 kali klik saja." },
-            { time: 18, text: "Tingkatkan produktivitas konten sosial media hari ini." },
-            { time: 22, text: "Gunakan waktu Anda untuk menciptakan ide-ide segar." },
-            { time: 26, text: "Mari raih keberhasilan yang luar biasa bersama-sama!" },
-            { time: 30, text: "Terima kasih sudah menyimak klip visual spesial ini." }
-        ];
-
-        // UI DOM Elements
+        // Target UI Elements
         const uploadStage = document.getElementById('upload-stage');
-        const playerStage = document.getElementById('player-stage');
-        const videoInput = document.getElementById('video-file-picker');
-        const dropzone = document.getElementById('dropzone');
+        const editorStage = document.getElementById('editor-stage');
+        const exportingStage = document.getElementById('exporting-stage');
+        const successStage = document.getElementById('success-stage');
+
+        const fileInput = document.getElementById('video-file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const studioVideo = document.getElementById('studio-video');
         
-        const videoEl = document.getElementById('studio-video');
-        const canvasEl = document.getElementById('studio-canvas');
-        const canvasCtx = canvasEl.getContext('2d');
-        const captionOverlay = document.getElementById('caption-overlay');
-        const captionText = document.getElementById('caption-text');
+        const clipStartInput = document.getElementById('clip-start-range');
+        const clipEndInput = document.getElementById('clip-end-range');
+        const trackHighlight = document.getElementById('timeline-track-highlight');
         
-        const btnPlayPause = document.getElementById('btn-play-pause');
+        const startTimeVal = document.getElementById('start-time-val');
+        const endTimeVal = document.getElementById('end-time-val');
+        const durationTimeVal = document.getElementById('duration-time-val');
+        const currentPlaybackTime = document.getElementById('current-playback-time');
+
+        const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
-        const btnAudio = document.getElementById('btn-audio');
-        const audioIcon = document.getElementById('audio-icon');
-        const timeDisplay = document.getElementById('studio-time-display');
+        const discardVideoBtn = document.getElementById('discard-video-btn');
+        const renderClipBtn = document.getElementById('render-clip-btn');
+        const resetWorkspaceBtn = document.getElementById('reset-workspace-btn');
         
-        const activeFilename = document.getElementById('active-filename');
-        const trimDurationBadge = document.getElementById('trim-duration-badge');
+        const compileProgressBar = document.getElementById('compile-progress-bar');
+        const compileProgressPercent = document.getElementById('compile-progress-percent');
+        const compileProgressTime = document.getElementById('compile-progress-time');
+        const compilationCanvas = document.getElementById('compilation-canvas');
+        const finalVideoElement = document.getElementById('final-video-element');
+        const downloadFinalBtn = document.getElementById('download-final-btn');
         
-        const trimStartRange = document.getElementById('trim-start-range');
-        const trimEndRange = document.getElementById('trim-end-range');
-        const sliderRange = document.getElementById('slider-range');
-        const handleStartVisual = document.getElementById('handle-start-visual');
-        const handleEndVisual = document.getElementById('handle-end-visual');
-        const trimStartTimeText = document.getElementById('trim-start-time');
-        const trimEndTimeText = document.getElementById('trim-end-time');
+        const waveformCanvas = document.getElementById('waveform-canvas');
+        const waveformPlaceholder = document.getElementById('waveform-placeholder');
 
-        const aiEmptyState = document.getElementById('ai-clipping-empty-state');
-        const aiReadyState = document.getElementById('ai-clipping-ready-state');
-        const aiProcessingState = document.getElementById('ai-clipping-processing-state');
-        const aiResultState = document.getElementById('ai-clipping-result-state');
-        const clipsListContainer = document.getElementById('result-clips-list');
+        const aiPeakBtn = document.getElementById('ai-peak-btn');
+        const aiSplitBtn = document.getElementById('ai-split-btn');
 
-        ['dragenter', 'dragover'].forEach(name => {
-            dropzone.addEventListener(name, (e) => {
-                e.preventDefault();
-                dropzone.classList.add('border-brand-500', 'bg-brand-50/40');
-            });
+        // Application Engine States
+        let uploadedVideoFile = null;
+        let originalVideoDuration = 0;
+        let aspectSelection = '169'; // Default 16:9 Landscape
+        let audioAnalysisData = null; // Decoded Audio ArrayBuffer Data
+        let audioPeaks = []; // Calculated local energy peaks
+
+        // Drag and drop event logic
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-brand-500', 'bg-zinc-900/80');
         });
 
-        ['dragleave', 'drop'].forEach(name => {
-            dropzone.addEventListener(name, (e) => {
-                e.preventDefault();
-                dropzone.classList.remove('border-brand-500', 'bg-brand-50/40');
-            });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-brand-500', 'bg-zinc-900/80');
         });
 
-        dropzone.addEventListener('drop', (e) => {
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-brand-500', 'bg-zinc-900/80');
             const files = e.dataTransfer.files;
             if (files.length > 0) {
-                handleUploadedVideoFile(files[0]);
+                processUploadedFile(files[0]);
             }
         });
 
-        videoInput.addEventListener('change', (e) => {
+        fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                handleUploadedVideoFile(e.target.files[0]);
+                processUploadedFile(e.target.files[0]);
             }
         });
 
-        // Parse & load file
-        function handleUploadedVideoFile(file) {
+        // Process uploaded file and setup engine
+        async function processUploadedFile(file) {
             if (!file.type.startsWith('video/')) {
-                showToast("Format Tidak Valid", "Pastikan Anda mengunggah jenis file video.", "error");
+                showNotification("Format file tidak valid. Harap unggah file video.");
                 return;
             }
-            activeVideoTitle = file.name;
-            const objectUrl = URL.createObjectURL(file);
-            initVideoLab(objectUrl);
-        }
 
-        // Trigger curated samples directly
-        function loadSampleVideo(key) {
-            const target = sampleAssets[key];
-            if (!target) return;
-            activeVideoTitle = target.title;
-            clipSegments = target.clips;
-            initVideoLab(target.url);
-            showToast("Video Sampel Dimuat", "Mempersiapkan editor interaktif.", "success");
-        }
-
-        function initVideoLab(sourceUrl) {
-            activeVideoUrl = sourceUrl;
-            videoEl.src = sourceUrl;
-            videoEl.load();
-
-            // Reveal player layouts
-            uploadStage.classList.add('hidden');
-            playerStage.classList.remove('hidden');
+            uploadedVideoFile = file;
+            const sourceUrl = URL.createObjectURL(file);
+            studioVideo.src = sourceUrl;
             
-            // Adjust metadata on load
-            videoEl.onloadedmetadata = () => {
-                duration = videoEl.duration;
-                activeFilename.textContent = activeVideoTitle;
-                
-                // Set default trimmer range
-                trimStartRange.max = Math.floor(duration);
-                trimEndRange.max = Math.floor(duration);
-                trimStartRange.value = 0;
-                trimEndRange.value = Math.min(30, Math.floor(duration));
-                
-                updateTrimmerUI();
+            // Switch screen to editor stage
+            uploadStage.classList.add('hidden');
+            editorStage.classList.remove('hidden');
+            editorStage.classList.add('flex');
+            
+            // Show waveform decoding state
+            waveformPlaceholder.classList.remove('hidden');
 
-                // Trigger AI engine automatically so they get immediate gratification
-                aiEmptyState.classList.add('hidden');
-                aiReadyState.classList.remove('hidden');
-                aiResultState.classList.add('hidden');
-                aiProcessingState.classList.add('hidden');
-
-                // Kickstart canvas simulation rendering loops
-                startCanvasRenderer();
+            // Wait for video metadata to initialize ranges
+            studioVideo.onloadedmetadata = () => {
+                originalVideoDuration = studioVideo.duration;
                 
-                // Play first frames
-                videoEl.currentTime = 0;
-                videoEl.play();
-                playIcon.setAttribute('data-lucide', 'pause');
-                lucide.createIcons();
+                // Set slider limits
+                clipStartInput.max = originalVideoDuration;
+                clipEndInput.max = originalVideoDuration;
+                
+                clipStartInput.value = 0;
+                // Default clip selection: First 15 seconds or total duration if video is shorter
+                clipEndInput.value = Math.min(15, originalVideoDuration);
+
+                updateTimelineVisuals();
+                updateTimeDisplay();
+                
+                // Initialize audio analysis for Auto Peak Highlight AI detection
+                analyzeVideoAudioData(file);
             };
         }
 
-        // Unload and return to initial file drop zone
-        function unloadVideo() {
-            stopCanvasRenderer();
-            videoEl.pause();
-            videoEl.src = "";
-            activeVideoUrl = null;
+        // Real-time audio waveform decoding directly in the client sandbox
+        async function analyzeVideoAudioData(file) {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const arrayBuffer = await file.arrayBuffer();
+                
+                // Attempt to decode audio data track from the video
+                audioContext.decodeAudioData(arrayBuffer, (decodedBuffer) => {
+                    audioAnalysisData = decodedBuffer;
+                    const channelData = decodedBuffer.getChannelData(0); // Left channel or mono channel data
+                    
+                    // Downsample raw points to draw high quality visual bars (e.g. 150 bars)
+                    const sampleCount = 150;
+                    const blockSize = Math.floor(channelData.length / sampleCount);
+                    audioPeaks = [];
+                    
+                    for (let i = 0; i < sampleCount; i++) {
+                        let blockStart = i * blockSize;
+                        let sum = 0;
+                        for (let j = 0; j < blockSize; j++) {
+                            sum += Math.abs(channelData[blockStart + j]);
+                        }
+                        audioPeaks.push(sum / blockSize); // Average energy of block
+                    }
+
+                    // Render Waveform Canvas
+                    renderWaveformCanvasGraphic(audioPeaks);
+                    waveformPlaceholder.classList.add('hidden');
+                    showNotification("AI Gelombang berhasil dimuat. Siap menganalisis!");
+                }, (error) => {
+                    console.warn("Mungkin video tidak memiliki stream audio: ", error);
+                    generateFallbackWaveform();
+                });
+            } catch (err) {
+                console.error("Terjadi kegagalan analisis audio: ", err);
+                generateFallbackWaveform();
+            }
+        }
+
+        // Generate synthetic aesthetic waveform if no audio stream exists
+        function generateFallbackWaveform() {
+            audioPeaks = Array.from({length: 150}, () => 0.1 + Math.random() * 0.4);
+            renderWaveformCanvasGraphic(audioPeaks);
+            waveformPlaceholder.classList.add('hidden');
+        }
+
+        // Graphic drawer of Waveform peaks
+        function renderWaveformCanvasGraphic(peaks) {
+            const ctx = waveformCanvas.getContext('2d');
             
+            // Handle retina scaling
+            const dpr = window.devicePixelRatio || 1;
+            waveformCanvas.width = waveformCanvas.offsetWidth * dpr;
+            waveformCanvas.height = waveformCanvas.offsetHeight * dpr;
+            ctx.scale(dpr, dpr);
+
+            const w = waveformCanvas.offsetWidth;
+            const h = waveformCanvas.offsetHeight;
+            ctx.clearRect(0, 0, w, h);
+
+            const barWidth = w / peaks.length;
+            const gap = 1.5;
+
+            // Render bars
+            for (let i = 0; i < peaks.length; i++) {
+                const peak = peaks[i];
+                // Scale height based on peak value
+                const barHeight = Math.max(3, peak * h * 2.2); 
+                const x = i * barWidth;
+                const y = (h - barHeight) / 2;
+
+                // Color gradient effect
+                ctx.fillStyle = '#27272a'; // Zinc background bars
+                ctx.fillRect(x + gap, y, barWidth - gap, barHeight);
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (audioPeaks && audioPeaks.length > 0) {
+                renderWaveformCanvasGraphic(audioPeaks);
+            }
+        });
+
+        // Control listeners for Aspect ratio buttons
+        document.querySelectorAll('.aspect-ratio-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const buttonSelected = e.currentTarget;
+                aspectSelection = buttonSelected.getAttribute('data-ratio');
+                
+                // Clear active button indicators
+                document.querySelectorAll('.aspect-ratio-btn').forEach(b => {
+                    b.className = "aspect-ratio-btn p-3 bg-zinc-850 border border-zinc-750 hover:border-zinc-600 rounded-xl flex flex-col items-center justify-center gap-1 text-zinc-400 hover:text-white shadow-depth-slate transition-all";
+                });
+
+                // Apply active design styles
+                buttonSelected.className = "aspect-ratio-btn p-3 bg-brand-600/10 border-2 border-brand-500 rounded-xl flex flex-col items-center justify-center gap-1 text-white shadow-depth-primary transition-all";
+                showNotification(`Aspek rasio diubah menjadi ${aspectSelection === '169' ? '16:9 Landscape' : aspectSelection === '916' ? '9:16 Portrait' : '1:1 Square'}`);
+            });
+        });
+
+        // Keep timeline sliders linked & synchronized
+        function updateTimelineVisuals() {
+            let start = parseFloat(clipStartInput.value);
+            let end = parseFloat(clipEndInput.value);
+
+            // Maintain logical gap safety
+            if (start >= end) {
+                if (document.activeElement === clipStartInput) {
+                    clipStartInput.value = end - 0.1;
+                    start = parseFloat(clipStartInput.value);
+                } else {
+                    clipEndInput.value = start + 0.1;
+                    end = parseFloat(clipEndInput.value);
+                }
+            }
+
+            // Sync visual highlights
+            const startPct = (start / originalVideoDuration) * 100;
+            const endPct = (end / originalVideoDuration) * 100;
+
+            trackHighlight.style.left = `${startPct}%`;
+            trackHighlight.style.right = `${100 - endPct}%`;
+        }
+
+        // Format raw floating seconds to digital readout
+        function formatTimeStandard(sec) {
+            const minutes = Math.floor(sec / 60);
+            const seconds = Math.floor(sec % 60);
+            const ms = Math.floor((sec % 1) * 10);
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${ms}`;
+        }
+
+        function updateTimeDisplay() {
+            const start = parseFloat(clipStartInput.value);
+            const end = parseFloat(clipEndInput.value);
+            const total = end - start;
+
+            startTimeVal.innerText = formatTimeStandard(start);
+            endTimeVal.innerText = formatTimeStandard(end);
+            durationTimeVal.innerText = `${total.toFixed(1)}s`;
+            
+            currentPlaybackTime.innerText = `${formatTimeStandard(studioVideo.currentTime)} / ${formatTimeStandard(originalVideoDuration)}`;
+        }
+
+        // Interactive inputs
+        clipStartInput.addEventListener('input', () => {
+            updateTimelineVisuals();
+            updateTimeDisplay();
+            // Seek playback to preview clip start
+            studioVideo.currentTime = parseFloat(clipStartInput.value);
+        });
+
+        clipEndInput.addEventListener('input', () => {
+            updateTimelineVisuals();
+            updateTimeDisplay();
+        });
+
+        // Loop the clip playback to maintain a live preview context
+        studioVideo.addEventListener('timeupdate', () => {
+            const start = parseFloat(clipStartInput.value);
+            const end = parseFloat(clipEndInput.value);
+            
+            updateTimeDisplay();
+
+            if (studioVideo.currentTime >= end) {
+                studioVideo.currentTime = start;
+                if (studioVideo.paused) {
+                    studioVideo.pause();
+                }
+            }
+        });
+
+        // Sound indicator dynamic micro-interaction animation
+        studioVideo.addEventListener('play', () => {
+            playIcon.className = "fa-solid fa-pause";
+            document.querySelectorAll('#sound-indicator span').forEach((bar, idx) => {
+                bar.classList.add('animate-pulse');
+                bar.style.animationDelay = `${idx * 0.15}s`;
+            });
+        });
+
+        studioVideo.addEventListener('pause', () => {
+            playIcon.className = "fa-solid fa-play";
+            document.querySelectorAll('#sound-indicator span').forEach((bar) => {
+                bar.classList.remove('animate-pulse');
+            });
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (studioVideo.paused) {
+                studioVideo.play();
+            } else {
+                studioVideo.pause();
+            }
+        });
+
+        // AI Algorithm 1: Peak Energy Highlight detection
+        aiPeakBtn.addEventListener('click', () => {
+            if (audioPeaks.length === 0) {
+                showNotification("Sistem sedang mendekode audio video. Mohon tunggu...");
+                return;
+            }
+
+            // Find continuous 15-second block with maximum sound intensity peaks
+            const searchWindowDuration = Math.min(15, originalVideoDuration);
+            const sampleRatePerPeak = originalVideoDuration / audioPeaks.length;
+            const windowSizeInSamples = Math.ceil(searchWindowDuration / sampleRatePerPeak);
+
+            let maxEnergySum = 0;
+            let targetStartIndex = 0;
+
+            // Sliding window search
+            for (let i = 0; i <= audioPeaks.length - windowSizeInSamples; i++) {
+                let currentEnergy = 0;
+                for (let j = 0; j < windowSizeInSamples; j++) {
+                    currentEnergy += audioPeaks[i + j];
+                }
+                if (currentEnergy > maxEnergySum) {
+                    maxEnergySum = currentEnergy;
+                    targetStartIndex = i;
+                }
+            }
+
+            // Apply calculated boundaries
+            const optimalStart = targetStartIndex * sampleRatePerPeak;
+            const optimalEnd = Math.min(optimalStart + searchWindowDuration, originalVideoDuration);
+
+            clipStartInput.value = optimalStart.toFixed(2);
+            clipEndInput.value = optimalEnd.toFixed(2);
+
+            updateTimelineVisuals();
+            updateTimeDisplay();
+            studioVideo.currentTime = optimalStart;
+            
+            showNotification("⚡ AI berhasil mendeteksi puncak klimaks video!");
+        });
+
+        // AI Algorithm 2: Auto Split 15s snippet
+        aiSplitBtn.addEventListener('click', () => {
+            const midpoint = originalVideoDuration / 2;
+            const startPoint = Math.max(0, midpoint - 7.5);
+            const endPoint = Math.min(originalVideoDuration, startPoint + 15);
+
+            clipStartInput.value = startPoint.toFixed(2);
+            clipEndInput.value = endPoint.toFixed(2);
+
+            updateTimelineVisuals();
+            updateTimeDisplay();
+            studioVideo.currentTime = startPoint;
+            
+            showNotification("⏱️ Klip berdurasi 15 detik diposisikan otomatis di tengah.");
+        });
+
+        discardVideoBtn.addEventListener('click', () => {
+            resetToUploadStage();
+        });
+
+        function resetToUploadStage() {
+            uploadedVideoFile = null;
+            originalVideoDuration = 0;
+            audioAnalysisData = null;
+            audioPeaks = [];
+            
+            studioVideo.src = "";
+            finalVideoElement.src = "";
+            fileInput.value = "";
+
+            editorStage.classList.add('hidden');
+            successStage.classList.add('hidden');
+            exportingStage.classList.add('hidden');
             uploadStage.classList.remove('hidden');
-            playerStage.classList.add('hidden');
-            
-            aiEmptyState.classList.remove('hidden');
-            aiReadyState.classList.add('hidden');
-            aiProcessingState.classList.add('hidden');
-            aiResultState.classList.add('hidden');
         }
 
-        function startCanvasRenderer() {
-            if (frameRateAnimationId) cancelAnimationFrame(frameRateAnimationId);
-            
-            function renderLoop() {
-                drawStudioCanvasFrame();
-                updateOverlaySubtitles();
-                frameRateAnimationId = requestAnimationFrame(renderLoop);
-            }
-            frameRateAnimationId = requestAnimationFrame(renderLoop);
-        }
+        resetWorkspaceBtn.addEventListener('click', () => {
+            resetToUploadStage();
+        });
 
-        function stopCanvasRenderer() {
-            if (frameRateAnimationId) cancelAnimationFrame(frameRateAnimationId);
-        }
+        // Process & Compile using native HTML5 stream capture (No server latency, works inside sandbox flawlessly)
+        renderClipBtn.addEventListener('click', async () => {
+            if (!uploadedVideoFile) return;
 
-        // Metode rendering Profesional: Menggambar crop visual tanpa mengubah aspek rasio canvas asli
-        function drawStudioCanvasFrame() {
-            if (!videoEl.videoWidth) return;
+            studioVideo.pause();
 
-            const vw = videoEl.videoWidth;
-            const vh = videoEl.videoHeight;
-            
-            // Set canvas resolusi sesuai video asli agar hasil jernih dan proporsional terhadap kontainernya
-            if (canvasEl.width !== vw || canvasEl.height !== vh) {
-                canvasEl.width = vw;
-                canvasEl.height = vh;
-            }
+            const startVal = parseFloat(clipStartInput.value);
+            const endVal = parseFloat(clipEndInput.value);
+            const duration = endVal - startVal;
 
-            // Bersihkan kanvas
-            canvasCtx.clearRect(0, 0, vw, vh);
-
-            // Selalu gambar latar belakang hitam pekat
-            canvasCtx.fillStyle = '#020617'; // slate-950
-            canvasCtx.fillRect(0, 0, vw, vh);
-
-            // Logika simulasi crop (Masking Visual)
-            if (aspectSelected === '9-16') {
-                const cropW = vh * (9 / 16);
-                const cropH = vh;
-                const cropX = (vw - cropW) / 2;
-                const cropY = 0;
-
-                // Trik UI Editor: Gambar versi blur/gelap di latar belakang
-                canvasCtx.globalAlpha = 0.25;
-                canvasCtx.drawImage(videoEl, 0, 0, vw, vh);
-                canvasCtx.globalAlpha = 1.0;
-
-                // Gambar hasil crop di tengah secara presisi
-                canvasCtx.drawImage(videoEl, cropX, cropY, cropW, cropH, cropX, cropY, cropW, cropH);
-                
-                // Tambahkan guide box gaya profesional
-                canvasCtx.strokeStyle = 'rgba(14, 165, 233, 0.8)'; // Brand Blue
-                canvasCtx.lineWidth = Math.max(vw * 0.005, 4); 
-                canvasCtx.strokeRect(cropX, cropY, cropW, cropH);
-
-            } else if (aspectSelected === '1-1') {
-                const cropSize = Math.min(vw, vh);
-                const cropX = (vw - cropSize) / 2;
-                const cropY = (vh - cropSize) / 2;
-
-                canvasCtx.globalAlpha = 0.25;
-                canvasCtx.drawImage(videoEl, 0, 0, vw, vh);
-                canvasCtx.globalAlpha = 1.0;
-
-                canvasCtx.drawImage(videoEl, cropX, cropY, cropSize, cropSize, cropX, cropY, cropSize, cropSize);
-                
-                canvasCtx.strokeStyle = 'rgba(14, 165, 233, 0.8)';
-                canvasCtx.lineWidth = Math.max(vw * 0.005, 4);
-                canvasCtx.strokeRect(cropX, cropY, cropSize, cropSize);
-
-            } else {
-                // 16:9 Landscape - Full frame tanpa reduksi
-                canvasCtx.drawImage(videoEl, 0, 0, vw, vh);
-            }
-        }
-
-        // Update real-time captions with simulated matching dialogue time
-        function updateOverlaySubtitles() {
-            if (captionStyleSelected === 'none') {
-                captionOverlay.classList.add('hidden');
+            if (duration <= 0.2) {
+                showNotification("Durasi klip terlalu pendek!");
                 return;
             }
 
-            const currentSec = Math.floor(videoEl.currentTime);
-            // Locate dynamic index matching range
-            const matched = demoSubtitles.find(sub => currentSec >= sub.time && currentSec < sub.time + 4);
-            
-            if (matched) {
-                captionOverlay.classList.remove('hidden');
-                captionText.textContent = `"${matched.text}"`;
+            // Switch to compile scene
+            editorStage.classList.add('hidden');
+            exportingStage.classList.remove('hidden');
+            exportingStage.classList.add('flex');
 
-                // Set styles dynamically based on current template choice
-                if (captionStyleSelected === 'tiktok') {
-                    captionText.className = "px-5 py-2.5 font-extrabold text-xl sm:text-2xl uppercase tracking-wider inline-block text-[#facc15] stroke-black drop-shadow-[0_4px_4px_rgba(0,0,0,1)]";
-                    captionText.style.webkitTextStroke = "2px black";
-                    captionText.style.backgroundColor = "transparent";
-                    captionText.style.textShadow = "2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000";
-                    captionText.style.border = "none";
-                } else if (captionStyleSelected === 'minimal') {
-                    captionText.className = "px-5 py-3 font-bold text-base sm:text-lg tracking-normal inline-block text-slate-900 bg-white/95 rounded-xl shadow-lg border border-slate-200";
-                    captionText.style.webkitTextStroke = "0px transparent";
-                    captionText.style.textShadow = "none";
-                } else if (captionStyleSelected === 'neon') {
-                    captionText.className = "px-6 py-2.5 font-black text-xl sm:text-2xl uppercase tracking-widest inline-block text-white bg-slate-900/85 rounded-2xl border-2 border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.7)]";
-                    captionText.style.webkitTextStroke = "0px transparent";
-                    captionText.style.textShadow = "0 0 10px rgba(168,85,247,1)";
-                }
+            // Quality & dimensions
+            const targetQuality = parseInt(document.getElementById('export-quality').value);
+            const targetFormat = document.getElementById('export-format').value;
+
+            // Dimensions logic
+            let canvasWidth = 1280;
+            let canvasHeight = 720;
+            if (targetQuality === 1080) {
+                canvasWidth = 1920;
+                canvasHeight = 1080;
+            } else if (targetQuality === 480) {
+                canvasWidth = 854;
+                canvasHeight = 480;
+            }
+
+            // Aspect Ratio adjustments for bounds
+            if (aspectSelection === '916') {
+                // Invert dimension values
+                const temp = canvasWidth;
+                canvasWidth = canvasHeight;
+                canvasHeight = temp;
+            } else if (aspectSelection === '11') {
+                canvasHeight = canvasWidth; // Square
+            }
+
+            compilationCanvas.width = canvasWidth;
+            compilationCanvas.height = canvasHeight;
+            const ctx = compilationCanvas.getContext('2d');
+
+            // Setup audio context & source split
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const sourceNode = audioCtx.createMediaElementSource(studioVideo);
+            const streamDest = audioCtx.createMediaStreamDestination();
+            
+            sourceNode.connect(streamDest);
+            sourceNode.connect(audioCtx.destination); // Send audio to system output for tracking
+
+            // Video Canvas Stream capture
+            const videoStream = compilationCanvas.captureStream(30); // Capture at 30 fps
+            const audioStream = streamDest.stream;
+
+            // Mix Video with clean WebAudio streams
+            const combinedCompStream = new MediaStream([
+                ...videoStream.getVideoTracks(),
+                ...audioStream.getAudioTracks()
+            ]);
+
+            // Construct MediaRecorder with options
+            let mimeTypeSelection = 'video/webm;codecs=vp9,opus';
+            if (targetFormat === 'mp4') {
+                // Safari or specific chrome fallback
+                mimeTypeSelection = MediaRecorder.isTypeSupported('video/mp4;codecs=avc1,mp4a.40.2') 
+                                    ? 'video/mp4;codecs=avc1,mp4a.40.2' 
+                                    : 'video/webm';
             } else {
-                captionOverlay.classList.add('hidden');
-            }
-        }
-
-        function updateTrimmerUI() {
-            const startVal = parseInt(trimStartRange.value);
-            const endVal = parseInt(trimEndRange.value);
-
-            // Clamp sliders so start cannot overlap end
-            if (startVal >= endVal) {
-                trimStartRange.value = endVal - 1;
-                return;
-            }
-
-            // Calculation percents
-            const startPercent = (startVal / duration) * 100;
-            const endPercent = (100 - (endVal / duration) * 100);
-
-            sliderRange.style.left = startPercent + "%";
-            sliderRange.style.right = endPercent + "%";
-
-            // Visual Handles
-            handleStartVisual.style.left = startPercent + "%";
-            handleEndVisual.style.left = (100 - endPercent) + "%";
-
-            // Timer display
-            trimStartTimeText.innerHTML = `<i data-lucide="clock" class="w-4 h-4 text-brand-500"></i> Mulai: ${formatTimeCode(startVal)}`;
-            trimEndTimeText.innerHTML = `Selesai: ${formatTimeCode(endVal)} <i data-lucide="clock" class="w-4 h-4 text-accent-500"></i>`;
-            
-            const activeTrimmerDiff = endVal - startVal;
-            trimDurationBadge.textContent = `Durasi: ${activeTrimmerDiff} detik`;
-            
-            lucide.createIcons();
-        }
-
-        // Bind interactive range sliders
-        trimStartRange.addEventListener('input', () => {
-            updateTrimmerUI();
-            videoEl.currentTime = parseInt(trimStartRange.value);
-        });
-
-        trimEndRange.addEventListener('input', () => {
-            updateTrimmerUI();
-            videoEl.currentTime = parseInt(trimEndRange.value);
-        });
-
-        // Playback Action Listeners
-        btnPlayPause.addEventListener('click', () => {
-            if (videoEl.paused) {
-                // Ensure loop wraps inside active range boundaries
-                const startSec = parseInt(trimStartRange.value);
-                const endSec = parseInt(trimEndRange.value);
-                if (videoEl.currentTime < startSec || videoEl.currentTime >= endSec) {
-                    videoEl.currentTime = startSec;
+                if (!MediaRecorder.isTypeSupported(mimeTypeSelection)) {
+                    mimeTypeSelection = 'video/webm;codecs=vp8,opus';
                 }
-                
-                videoEl.play();
-                playIcon.setAttribute('data-lucide', 'pause');
-            } else {
-                videoEl.pause();
-                playIcon.setAttribute('data-lucide', 'play');
-            }
-            lucide.createIcons();
-        });
-
-        // Trigger safe bounding checking on timeupdate
-        videoEl.addEventListener('timeupdate', () => {
-            const startSec = parseInt(trimStartRange.value);
-            const endSec = parseInt(trimEndRange.value);
-            
-            // Loop clip content
-            if (videoEl.currentTime < startSec || videoEl.currentTime >= endSec) {
-                videoEl.currentTime = startSec;
             }
 
-            // Format dynamic ticker string
-            timeDisplay.textContent = `${formatTimeCode(videoEl.currentTime)} / ${formatTimeCode(duration)}`;
-        });
-
-        btnAudio.addEventListener('click', () => {
-            videoEl.muted = !videoEl.muted;
-            if (videoEl.muted) {
-                audioIcon.setAttribute('data-lucide', 'volume-x');
-                showToast("Suara Dibisukan", "Audio monitor dimatikan.", "info");
-            } else {
-                audioIcon.setAttribute('data-lucide', 'volume-2');
-                showToast("Suara Aktif", "Audio monitor menyala.", "info");
+            let mediaRecorder;
+            try {
+                mediaRecorder = new MediaRecorder(combinedCompStream, {
+                    mimeType: mimeTypeSelection,
+                    videoBitsPerSecond: targetQuality === 1080 ? 5000000 : 2500000
+                });
+            } catch (e) {
+                console.warn("MimeType custom format tidak didukung browser, menggunakan konfigurasi standard.");
+                mediaRecorder = new MediaRecorder(combinedCompStream);
             }
-            lucide.createIcons();
-        });
 
-        // Format raw float values to structured strings
-        function formatTimeCode(secs) {
-            const m = Math.floor(secs / 60);
-            const s = Math.floor(secs % 60);
-            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-
-        function setStudioAspect(aspect) {
-            aspectSelected = aspect;
-            
-            // Reset active states for UI buttons
-            document.querySelectorAll('.aspect-btn').forEach(btn => {
-                btn.className = "aspect-btn p-4 rounded-2xl bg-white border-2 border-slate-100 hover:border-slate-300 text-left flex flex-col justify-between transition-all group";
-            });
-            document.querySelectorAll('[id^="icon-aspect-"]').forEach(icon => {
-                icon.className = "w-5 h-5 text-slate-300";
-                icon.setAttribute('data-lucide', 'circle');
-            });
-
-            // Set Current visual state
-            const activeBtn = document.getElementById(`btn-aspect-${aspect}`);
-            const activeIcon = document.getElementById(`icon-aspect-${aspect}`);
-            
-            activeBtn.className = "aspect-btn p-4 rounded-2xl bg-brand-50/50 border-2 border-brand-500 text-left flex flex-col justify-between transition-all group shadow-sm";
-            activeIcon.className = "w-5 h-5 text-brand-500";
-            activeIcon.setAttribute('data-lucide', 'check-circle-2');
-
-            lucide.createIcons();
-            showToast("Rasio Diubah", `Dimensi video diubah ke ${aspect === '9-16' ? 'Vertikal (9:16)' : aspect === '1-1' ? 'Kotak (1:1)' : 'Lanskap (16:9)'}.`, "info");
-        }
-
-        function setCaptionStyle(style) {
-            captionStyleSelected = style;
-            
-            document.querySelectorAll('.caption-style-btn').forEach(btn => {
-                btn.className = "caption-style-btn p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 text-center transition-all";
-            });
-
-            const activeBtn = document.getElementById(`btn-style-${style}`);
-            activeBtn.className = "caption-style-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50/40 text-center transition-all shadow-sm";
-            
-            showToast("Desain Teks Diperbarui", `Gaya teks diset ke ${style.toUpperCase()}`, "info");
-        }
-
-        function triggerAIClipping() {
-            aiReadyState.classList.add('hidden');
-            aiProcessingState.classList.remove('hidden');
-
-            const processingBar = document.getElementById('ai-processing-bar');
-            const headline = document.getElementById('process-headline');
-            const subtext = document.getElementById('process-subtext');
-
-            const steps = [
-                { progress: 25, title: "Menganalisis Pola Audio...", desc: "Melacak modulasi desibel untuk mencari percakapan penting." },
-                { progress: 50, title: "Menerjemahkan Teks Offline...", desc: "Memproses transkripsi secara aman langsung pada memori peranti." },
-                { progress: 75, title: "Menghitung Viral Score...", desc: "Mencocokkan intensitas emosi dengan indeks retensi sosial media." },
-                { progress: 100, title: "Memotong Segmen Kunci...", desc: "Mengompilasi rentang waktu ke dalam daftar klip yang siap digunakan." }
-            ];
-
-            let stepIdx = 0;
-            const stepInterval = setInterval(() => {
-                if (stepIdx < steps.length) {
-                    processingBar.style.width = steps[stepIdx].progress + "%";
-                    headline.textContent = steps[stepIdx].title;
-                    subtext.textContent = steps[stepIdx].desc;
-                    stepIdx++;
-                } else {
-                    clearInterval(stepInterval);
-                    finishAIClipping();
+            const recordedChunks = [];
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
                 }
-            }, 1200);
-        }
+            };
 
-        // Output results to UI panel
-        function finishAIClipping() {
-            aiProcessingState.classList.add('hidden');
-            aiResultState.classList.remove('hidden');
+            // Trigger when recording stops
+            mediaRecorder.onstop = () => {
+                // Terminate routing
+                sourceNode.disconnect();
+                audioCtx.close();
 
-            // Generate elements dynamically
-            clipsListContainer.innerHTML = "";
+                const videoBlob = new Blob(recordedChunks, { type: targetFormat === 'mp4' ? 'video/mp4' : 'video/webm' });
+                const blobUrl = URL.createObjectURL(videoBlob);
 
-            // Fallback clips array if uploaded video doesn't have custom preset mappings
-            const finalClips = clipSegments.length > 0 ? clipSegments : [
-                { title: "Intro Paling Menarik", start: 2, duration: 15, score: 98, tags: ["Viral", "Edukasi"] },
-                { title: "Klimaks Penjelasan Utama", start: Math.min(20, Math.floor(duration/2)), duration: 12, score: 91, tags: ["Strategi", "Info"] }
-            ];
+                // Prepare final stage
+                finalVideoElement.src = blobUrl;
+                downloadFinalBtn.href = blobUrl;
+                downloadFinalBtn.download = `IkoAlmas_Clipper_Result.${targetFormat}`;
 
-            finalClips.forEach((clip, index) => {
-                const itemHTML = `
-                    <div onclick="setActiveClipSegment(${clip.start}, ${clip.duration})" class="p-4 bg-white border border-slate-200 hover:border-brand-500 rounded-2xl shadow-sm hover:shadow transition-all flex items-center justify-between group cursor-pointer mb-3">
-                        <div class="flex items-center gap-3.5">
-                            <div class="w-12 h-12 rounded-xl bg-slate-900 flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-slate-700 shadow-inner">
-                                <i data-lucide="play" class="w-5 h-5 text-white group-hover:scale-110 group-hover:text-brand-400 transition-all"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <h5 class="font-bold text-sm text-slate-800">${clip.title}</h5>
-                                    <span class="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100 flex items-center gap-1">
-                                        <i data-lucide="zap" class="w-2.5 h-2.5"></i> ${clip.score}%
-                                    </span>
-                                </div>
-                                <p class="text-xs text-slate-500 font-medium">Durasi ${clip.duration}s (${formatTimeCode(clip.start)} - ${formatTimeCode(clip.start + clip.duration)})</p>
-                            </div>
-                        </div>
-                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 group-hover:text-brand-500 transition-colors"></i>
-                    </div>
-                `;
-                clipsListContainer.insertAdjacentHTML('beforeend', itemHTML);
-            });
+                exportingStage.classList.add('hidden');
+                successStage.classList.remove('hidden');
+                successStage.classList.add('flex');
+                showNotification("🎉 Video berhasil dirender sempurna!");
+            };
 
-            lucide.createIcons();
-            showToast("Analisis Selesai", "Klip terbaik berhasil diekstrak dan siap diunduh.", "success");
-        }
+            // Setup playback pointers
+            studioVideo.currentTime = startVal;
+            studioVideo.muted = false; // Turn sound on for physical capture
 
-        // Set segment values instantly on clip selection
-        function setActiveClipSegment(start, durationClip) {
-            trimStartRange.value = start;
-            trimEndRange.value = start + durationClip;
-            updateTrimmerUI();
-            
-            // Loop preview to newly chosen clip location
-            videoEl.currentTime = start;
-            videoEl.play();
-            playIcon.setAttribute('data-lucide', 'pause');
-            lucide.createIcons();
-            
-            showToast("Segmen Dipilih", `Timeline disesuaikan ke posisi ${formatTimeCode(start)}.`, "info");
-        }
+            // Wait for seek to load correct frame
+            studioVideo.onseeked = () => {
+                // Prevent duplicate listener loops
+                studioVideo.onseeked = null;
 
-        function resetAIClipping() {
-            aiResultState.classList.add('hidden');
-            aiReadyState.classList.remove('hidden');
-        }
+                // Start recording
+                mediaRecorder.start();
+                studioVideo.play();
 
-        function triggerPremiumExport() {
-            const modal = document.getElementById('export-modal');
-            const renderBar = document.getElementById('render-bar-progress');
-            const label = document.getElementById('render-status-label');
-            const percent = document.getElementById('render-percent-label');
-            const completeNotice = document.getElementById('render-complete-notice');
-            
-            const btnClose = document.getElementById('btn-modal-close');
-            const btnDownload = document.getElementById('btn-modal-download');
+                // Trigger render pipeline
+                requestAnimationFrame(renderFrameEngineLoop);
+            };
 
-            // Reset modal states
-            completeNotice.classList.add('hidden');
-            btnDownload.classList.add('hidden');
-            btnClose.textContent = "Batalkan";
-            renderBar.style.width = "0%";
-            percent.textContent = "0%";
-            modal.classList.remove('hidden');
-
-            const renderingSteps = [
-                { percent: 15, msg: "Menyinkronkan Filter Resolusi..." },
-                { percent: 45, msg: "Membentuk Frame & Subtitle AI..." },
-                { percent: 80, msg: "Menyatukan Lapisan Suara..." },
-                { percent: 100, msg: "Finalisasi Data Export..." }
-            ];
-
-            let currStep = 0;
-            renderInterval = setInterval(() => {
-                if (currStep < renderingSteps.length) {
-                    renderBar.style.width = renderingSteps[currStep].percent + "%";
-                    percent.textContent = renderingSteps[currStep].percent + "%";
-                    label.textContent = renderingSteps[currStep].msg;
-                    currStep++;
-                } else {
-                    clearInterval(renderInterval);
-                    
-                    // Finalize successfully without requiring logs/login
-                    completeNotice.classList.remove('hidden');
-                    btnDownload.classList.remove('hidden');
-                    btnClose.textContent = "Tutup Peringatan";
-
-                    // Formulate automated dummy file browser download trigger
-                    const dummyBlob = new Blob(["Simulated premium video output."], { type: "video/mp4" });
-                    const downloadUrl = URL.createObjectURL(dummyBlob);
-                    
-                    btnDownload.href = downloadUrl;
-                    btnDownload.download = `IkoAlmas_Clip_${aspectSelected}_${activeVideoTitle || "Final.mp4"}`;
-
-                    // Auto-execute download
-                    const tempAnchor = document.createElement('a');
-                    tempAnchor.href = downloadUrl;
-                    tempAnchor.download = `IkoAlmas_Clip_${aspectSelected}_${activeVideoTitle || "Final.mp4"}`;
-                    document.body.appendChild(tempAnchor);
-                    tempAnchor.click();
-                    document.body.removeChild(tempAnchor);
-
-                    lucide.createIcons();
-                    showToast("Pengunduhan Aktif", "Berkas sedang disimpan ke penyimpanan Anda.", "success");
+            // Animation Loop compiler
+            function renderFrameEngineLoop() {
+                if (studioVideo.paused || studioVideo.currentTime >= endVal) {
+                    mediaRecorder.stop();
+                    studioVideo.pause();
+                    return;
                 }
-            }, 800);
-        }
 
-        function closeExportModal() {
-            if (renderInterval) clearInterval(renderInterval);
-            document.getElementById('export-modal').classList.add('hidden');
-        }
+                // Render video calculations
+                const cw = compilationCanvas.width;
+                const ch = compilationCanvas.height;
+                const vw = studioVideo.videoWidth;
+                const vh = studioVideo.videoHeight;
 
-        // Close button click listener
-        document.getElementById('btn-modal-close').addEventListener('click', closeExportModal);
+                ctx.clearRect(0, 0, cw, ch);
 
-        function showToast(title, desc, type = "info") {
-            const toast = document.getElementById('custom-toast');
-            const toastTitle = document.getElementById('toast-title');
-            const toastDesc = document.getElementById('toast-desc');
-            const toastIconBg = document.getElementById('toast-icon-bg');
-            const toastIcon = document.getElementById('toast-icon');
+                // Aspect Selection Graphic Pipeline
+                if (aspectSelection === '169') {
+                    // Landscape draw stretch match
+                    ctx.drawImage(studioVideo, 0, 0, cw, ch);
+                } else if (aspectSelection === '916') {
+                    // Portrait with Blurred background dynamic bokeh
+                    ctx.save();
+                    ctx.filter = 'blur(40px) brightness(0.5)';
+                    ctx.drawImage(studioVideo, -cw * 0.7, 0, cw * 2.4, ch);
+                    ctx.restore();
 
-            toastTitle.textContent = title;
-            toastDesc.textContent = desc;
+                    // Main video aligned to center aspect ratio bounding box
+                    const scale = cw / vw;
+                    const calculatedHeight = vh * scale;
+                    const yPositionOffset = (ch - calculatedHeight) / 2;
+                    ctx.drawImage(studioVideo, 0, yPositionOffset, cw, calculatedHeight);
+                } else if (aspectSelection === '11') {
+                    // Square 1:1 format bokeh crop
+                    ctx.save();
+                    ctx.filter = 'blur(30px) brightness(0.4)';
+                    ctx.drawImage(studioVideo, 0, -ch * 0.4, cw, ch * 1.8);
+                    ctx.restore();
 
-            // Set color schemes
-            if (type === "success") {
-                toastIconBg.className = "w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 shadow-sm border border-emerald-100";
-                toastIcon.setAttribute('data-lucide', 'check-circle-2');
-            } else if (type === "error") {
-                toastIconBg.className = "w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 shadow-sm border border-red-100";
-                toastIcon.setAttribute('data-lucide', 'alert-circle');
-            } else {
-                toastIconBg.className = "w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0 shadow-sm border border-brand-100";
-                toastIcon.setAttribute('data-lucide', 'info');
+                    // Scaled content in center
+                    const scale = cw / vw;
+                    const calculatedHeight = vh * scale;
+                    const yPositionOffset = (ch - calculatedHeight) / 2;
+                    ctx.drawImage(studioVideo, 0, yPositionOffset, cw, calculatedHeight);
+                }
+
+                // Calculate current exact progress percentage
+                const elapsedProgress = studioVideo.currentTime - startVal;
+                const percent = Math.min(100, Math.round((elapsedProgress / duration) * 100));
+
+                // Update UI bars
+                compileProgressBar.style.width = `${percent}%`;
+                compileProgressPercent.innerText = `${percent}%`;
+                compileProgressTime.innerText = `${elapsedProgress.toFixed(1)}s / ${duration.toFixed(1)}s`;
+
+                // Recurse animation frame
+                requestAnimationFrame(renderFrameEngineLoop);
             }
+        });
 
-            lucide.createIcons();
-
-            // Slide in animation
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
+        function showNotification(message) {
+            const toast = document.createElement('div');
+            // Premium layout & transition design matching top-firms aesthetics
+            toast.className = 'fixed bottom-6 right-6 bg-zinc-900 border border-zinc-800 text-white px-5 py-3.5 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),_inset_0_1px_0_rgba(255,255,255,0.05)] z-50 transform transition-all duration-300 translate-y-20 opacity-0 font-medium flex items-center gap-2 text-xs uppercase tracking-wider';
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-400 text-sm"></i> ${message}`;
+            document.body.appendChild(toast);
+            
+            // Trigger animation frame queue
             setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+            }, 50);
+            
+            // Auto fade away after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                setTimeout(() => document.body.removeChild(toast), 300);
             }, 3500);
         }
-
-        function scrollToApp() {
-            document.getElementById('app-workspace').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Dynamic scroll effect for navbar transparency
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 30) {
-                nav.classList.add('shadow-md', 'border-slate-200/90', 'bg-white/90');
-                nav.classList.remove('border-slate-200/80', 'bg-white/85');
-            } else {
-                nav.classList.remove('shadow-md', 'border-slate-200/90', 'bg-white/90');
-                nav.classList.add('border-slate-200/80', 'bg-white/85');
-            }
-        });
 
     </script>
 </body>
